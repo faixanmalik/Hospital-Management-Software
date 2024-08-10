@@ -4,7 +4,6 @@ import Head from "next/head";
 import mongoose from "mongoose";
 import Hospital from "@/model/Hospital";
 import AyurvedicCenter from "@/model/AyurvedicCenter";
-import Doctor from "@/model/Doctor";
 import TopCards from "@/components/TopCards";
 import Sidebar from "@/components/Sidebar";
 
@@ -14,7 +13,7 @@ import Header from "@/components/Header";
 
 
 
-export default function Home({ dbHospitals, dbDoctors, dbAyurvedicCenters }) {
+export default function Home({ dbHospitals, dbAyurvedicCenters }) {
 
 
   return (
@@ -83,14 +82,12 @@ export async function getServerSideProps() {
   }
   
   let dbHospitals = await Hospital.find()
-  let dbDoctors = await Doctor.find()
   let dbAyurvedicCenters = await AyurvedicCenter.find()
 
   // Pass data to the page via props
   return {
     props: {
       dbHospitals: JSON.parse(JSON.stringify(dbHospitals)),
-      dbDoctors: JSON.parse(JSON.stringify(dbDoctors)),
       dbAyurvedicCenters: JSON.parse(JSON.stringify(dbAyurvedicCenters)),
     }
   }

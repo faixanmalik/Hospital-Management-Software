@@ -1,6 +1,6 @@
 import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
-import Hospital from '@/model/Hospital'
+import Drug from '@/model/Drug'
 import { Card, CardBody, Select, Typography } from '@material-tailwind/react'
 import React, { Fragment, useEffect, useState } from 'react'
 import mongoose from 'mongoose'
@@ -9,13 +9,13 @@ import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 import { MdDelete } from "react-icons/md";
-import { FaPlus, FaRegHospital } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/solid'
-import { AiOutlineDelete, AiOutlinePlusCircle } from 'react-icons/ai'
+import { AiOutlineDelete, AiOutlineMedicineBox, AiOutlinePlusCircle } from 'react-icons/ai'
 
 
-const Hospitals = ({ dbHospitals }) => {
+const Drugs = ({ dbDrugs }) => {
 
   const [open, setOpen] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
@@ -25,62 +25,58 @@ const Hospitals = ({ dbHospitals }) => {
   const [id, setId] = useState('')
   const [selectedIds, setSelectedIds] = useState([]);
 
-  const [filteredHospitals, setFilteredHospitals] = useState([])
+  const [filteredDrugs, setFilteredDrugs] = useState([])
 
   useEffect(() => {
-    setFilteredHospitals(dbHospitals);
-  }, [dbHospitals])
+    setFilteredDrugs(dbDrugs);
+  }, [dbDrugs])
   
 
-  const [hospitalData, setHospitalData] = useState({
-    hospitalID: '',
-    name: '',
-    email: '',
-    location: '',
-    contactNo: '',
-    doctors: [
-      { doctorID: '', name: '', specialization: '' },
-      { doctorID: '', name: '', specialization: '' },
+  const [drugData, setDrugData] = useState({
+    drugID: '',
+    drugName: '',
+    drugType: '',
+
+    suppliers: [
+      { supplierID: '', name: '', email: '', contactNo: '', location: '', },
+      { supplierID: '', name: '', email: '', contactNo: '', location: '', },
     ],
-    noOfDoctors: '',
-    noOfWards: '',
-    noOfBeds: '',
-    username: '',
-    password: '',
+    
+    joiningDate: '',
     desc: '',
   });
 
 
   const addLines = () => {
-    setHospitalData((prevData) => ({
+    setDrugData((prevData) => ({
       ...prevData,
-      doctors: [
-        ...prevData.doctors,
-        { doctorID: '', name: '', specialization: '' },
+      suppliers: [
+        ...prevData.suppliers,
+        { supplierID: '', name: '', email: '', contactNo: '', location: '', },
       ],
     }));
   }
 
   const delLines = (indexToDelete) => {
-    setHospitalData((prevData) => {
-      const updatedDoctors = prevData.doctors.filter((_, index) => index !== indexToDelete);
+    setDrugData((prevData) => {
+      const updatedData = prevData.suppliers.filter((_, index) => index !== indexToDelete);
       return {
         ...prevData,
-        doctors: updatedDoctors,
+        suppliers: updatedData,
       };
     });
   };
 
-  const handleDoctorChange = (e, index) => {
+  const handleSupplierChange = (e, index) => {
 
     const { name, value } = e.target;
-    setHospitalData((prevData) => {
-      const updatedDoctors = prevData.doctors.map((doctor, i) =>
-        i === index ? { ...doctor, [name]: value } : doctor
+    setDrugData((prevData) => {
+      const updatedData = prevData.suppliers.map((item, i) =>
+        i === index ? { ...item, [name]: value } : item
       );
       return {
         ...prevData,
-        doctors: updatedDoctors,
+        suppliers: updatedData,
       };
     });
   }
@@ -88,7 +84,7 @@ const Hospitals = ({ dbHospitals }) => {
   // Handle input changes for top-level fields
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setHospitalData((prevData) => ({
+    setDrugData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -107,7 +103,7 @@ const Hospitals = ({ dbHospitals }) => {
   const submit = async(e)=>{
     e.preventDefault();
 
-    const data = { hospitalData, path:'hospitals' }
+    const data = { drugData, path:'drugs' }
 
     let res = await fetch(`/api/addEntry`, {
       method: 'POST',
@@ -121,7 +117,7 @@ const Hospitals = ({ dbHospitals }) => {
     if (response.success === true) {
       toast.success(response.message, { position: 'top-right', autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: 'light',});
       setOpen(false)
-      setFilteredHospitals([...filteredHospitals, response.data]);
+      setFilteredDrugs([...filteredDrugs, response.data]);
     }
     else {
       toast.error(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
@@ -130,7 +126,7 @@ const Hospitals = ({ dbHospitals }) => {
   }
 
   const editEntry = async()=>{
-    const data = { id, hospitalData, path: 'hospitals'};
+    const data = { id, drugData, path: 'drugs'};
 
     let res = await fetch(`/api/editEntry`, {
       method: 'POST',
@@ -142,9 +138,9 @@ const Hospitals = ({ dbHospitals }) => {
     let response = await res.json()
     if (response.success === true) {
       setOpen(false)
-      setFilteredHospitals((prevHospitals) =>
-        prevHospitals.map((hospital) =>
-          hospital._id === hospitalData._id ? hospitalData : hospital
+      setFilteredDrugs((prevDrugs) =>
+        prevDrugs.map((drug) =>
+          drug._id === drugData._id ? drugData : drug
         )
       );
     }
@@ -155,7 +151,7 @@ const Hospitals = ({ dbHospitals }) => {
   }
 
   const delEntry = async()=>{
-    const data = { selectedIds , path: 'hospitals' };
+    const data = { selectedIds , path: 'drugs' };
     let res = await fetch(`/api/delEntry`, {
       method: 'POST',
       headers: { 
@@ -166,7 +162,7 @@ const Hospitals = ({ dbHospitals }) => {
     let response = await res.json()
 
     if (response.success === true) {
-      setFilteredHospitals(filteredHospitals.filter(item => !selectedIds.includes(item._id)));
+      setFilteredDrugs(filteredDrugs.filter(item => !selectedIds.includes(item._id)));
     }
     else {
       toast.error(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
@@ -194,7 +190,7 @@ const Hospitals = ({ dbHospitals }) => {
 
               <div className='flex justify-between items-center py-2'>
                 <Typography variant="h5" color="blue-gray" className="flex items-center">
-                  <FaRegHospital className='mr-2 text-xl' /> Hospitals ({filteredHospitals.length})
+                  <AiOutlineMedicineBox className='mr-2 text-xl' /> Drugs ({filteredDrugs.length})
                 </Typography>
 
                 <div className='flex space-x-1'>
@@ -203,21 +199,16 @@ const Hospitals = ({ dbHospitals }) => {
                     onClick={ ()=>{ 
 
                         setOpen(true),
-                        setHospitalData({
-                          hospitalID: '',
-                          name: '',
-                          email: '',
-                          location: '',
-                          contactNo: '',
-                          doctors: [
-                            { doctorID: '', name: '', specialization: '' },
-                            { doctorID: '', name: '', specialization: '' },
+                        setDrugData({
+                          drugID: '',
+                          drugName: '',
+                          drugType: '',
+                          joiningDate: '',
+
+                          suppliers: [
+                            { supplierID: '', name: '', email: '', contactNo: '', location: '', },
+                            { supplierID: '', name: '', email: '', contactNo: '', location: '', },
                           ],
-                          noOfDoctors: '',
-                          noOfWards: '',
-                          noOfBeds: '',
-                          username: '',
-                          password: '',
                           desc: '',
                         });
                         
@@ -228,7 +219,7 @@ const Hospitals = ({ dbHospitals }) => {
                     className="bg-baseColor hover:bg-hoverBaseColor flex items-center px-3 py-2 text-xs font-semibold text-cardColor border-none rounded-md"
                   >
                     <FaPlus className='mr-1' />
-                    Add Hospital
+                    Add Drug
                   </button>
 
                   <button onClick={()=>delEntry()} className="bg-deleteColor hover:bg-hoverDeleteColor flex items-center px-3 py-2 text-xs font-semibold text-cardColor border-none rounded-md">
@@ -253,40 +244,28 @@ const Hospitals = ({ dbHospitals }) => {
                                 </div>
                               </td>
                               <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                  Hospital ID
+                                  Drug ID
                               </th>
                               <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                  Name
+                                  Drug Name
                               </th>
                               <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                  Email
-                              </th>
-                              
-                              <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                  Contact No
+                                  Drug Type
                               </th>
                               <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                  No of Doctors
+                                  No of Suppliers
                               </th>
-                              <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                  No of Wards
-                              </th>
-                              <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                  No of Beds
-                              </th>
-                              
                               
                             </tr>
                           </thead>
                           <tbody className="overflow-y-auto">
                             
-                            {filteredHospitals.length != 0 && filteredHospitals.map((item, index)=>{
+                            {filteredDrugs.length != 0 && filteredDrugs.map((item, index)=>{
 
                               return <tr key={index} 
-                              // onClick={ ()=> { setHospitalData(item), setOpen(true), setId(item._id), setIsEdit(true) }} 
                               onClick={(e) => {
                                 if (!e.target.tagName.toLowerCase() === 'input' || e.target.type !== 'checkbox') {
-                                  e.stopPropagation(); setHospitalData(item), setOpen(true), setId(item._id), setIsEdit(true)
+                                  e.stopPropagation(); setDrugData(item), setOpen(true), setId(item._id), setIsEdit(true)
                                 }
                               }}
                               
@@ -296,13 +275,10 @@ const Hospitals = ({ dbHospitals }) => {
                                   <input id="checkbox-table-search-1" type="checkbox" onChange={e => handleRowCheckboxChange(e, item._id)} className="w-4 h-4 text-baseColor bg-gray-100 border-gray-300 rounded focus:ring-0 dark:focus:ring-baseColor dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"/>
                                 </div>
                               </td>
-                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs font-medium text-gray-800">{item.hospitalID}</td>
-                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.name}</td>
-                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.email}</td>
-                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.contactNo}</td>
-                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.noOfDoctors}</td>
-                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.noOfWards}</td>
-                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.noOfBeds}</td>
+                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs font-medium text-gray-800">{item.drugID}</td>
+                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.drugName}</td>
+                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.drugType}</td>
+                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.suppliers.length}</td>
                               
                             </tr>
                             })}
@@ -310,7 +286,7 @@ const Hospitals = ({ dbHospitals }) => {
                           </tbody>
                         </table>
 
-                        {filteredHospitals.length === 0 && <div className='w-full'>
+                        {filteredDrugs.length === 0 && <div className='w-full'>
                           <img className='mx-auto w-96' src="/nodatafound.jpg" alt="" />
                         </div>}
 
@@ -323,7 +299,7 @@ const Hospitals = ({ dbHospitals }) => {
           </Card>
 
 
-          {/* Add Hospital Popup */}
+          {/* Add Drug Popup */}
           <Transition.Root show={open} as={Fragment}>
             <Dialog as="div" className="relative z-20" onClose={()=>{setOpen(false)}}>
               <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
@@ -332,7 +308,7 @@ const Hospitals = ({ dbHospitals }) => {
               <div className="fixed inset-0 z-10 overflow-y-auto">
                 <div className="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
                   <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 translate-y-4 md:translate-y-0 md:scale-95" enterTo="opacity-100 translate-y-0 md:scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 translate-y-0 md:scale-100" leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95">
-                    <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-5xl">
+                    <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-6xl">
                       <div className="relative flex w-full items-center overflow-hidden bg-white px-4 pt-14 pb-8 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
                         <button type="button" className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-6 lg:right-8" onClick={() => setOpen(false)}>
                           <span className="sr-only">Close</span>
@@ -344,7 +320,7 @@ const Hospitals = ({ dbHospitals }) => {
                             <div className="md:grid md:grid-cols-1 md:gap-6">
                               <div className="md:col-span-1">
                                 <div className="px-4 sm:px-0">
-                                  <h3 className="text-lg font-medium leading-6 text-gray-900">Add Hospital</h3>
+                                  <h3 className="text-lg font-medium leading-6 text-gray-900">Add Drug</h3>
                                 </div>
                               </div>
                               <div className="mt-2 text-black md:col-span-2 md:mt-0 w-full">
@@ -352,32 +328,32 @@ const Hospitals = ({ dbHospitals }) => {
                                     
                                   <div className="grid grid-cols-6 gap-6">
                                     <div className="col-span-6 sm:col-span-1">
-                                      <label htmlFor="hospitalID" className="block text-sm font-medium text-gray-700">
-                                        Hospital ID
+                                      <label htmlFor="drugID" className="block text-sm font-medium text-gray-700">
+                                        Drug ID
                                       </label>
                                       <input
                                         onChange={handleChange}
-                                        value={hospitalData.hospitalID}
+                                        value={drugData.drugID}
                                         type="text"
-                                        name="hospitalID"
-                                        id="hospitalID"
-                                        autoComplete="hospitalID"
+                                        name="drugID"
+                                        id="drugID"
+                                        autoComplete="drugID"
                                         className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
                                         required
                                       />
                                     </div>
 
                                     <div className="col-span-6 sm:col-span-2">
-                                      <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                                        Name
+                                      <label htmlFor="drugName" className="block text-sm font-medium text-gray-700">
+                                        Drug Name
                                       </label>
                                       <input
                                         onChange={handleChange}
-                                        value={hospitalData.name}
+                                        value={drugData.drugName}
                                         type="text"
-                                        name="name"
-                                        id="name"
-                                        autoComplete="name"
+                                        name="drugName"
+                                        id="drugName"
+                                        autoComplete="drugName"
                                         className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
                                       />
                                     </div>
@@ -385,80 +361,41 @@ const Hospitals = ({ dbHospitals }) => {
                                     
 
                                     <div className="col-span-6 sm:col-span-3">
-                                      <label htmlFor="contactNo" className="block text-sm font-medium text-gray-700">
-                                        Contact No
+                                      <label htmlFor="drugType" className="block text-sm font-medium text-gray-700">
+                                        Drug Type
                                       </label>
                                       <input
                                         onChange={handleChange}
-                                        value={hospitalData.contactNo}
+                                        value={drugData.drugType}
                                         type="text"
-                                        name="contactNo"
-                                        id="contactNo"
-                                        autoComplete="contactNo"
+                                        name="drugType"
+                                        id="drugType"
+                                        autoComplete="drugType"
                                         className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
                                       />
                                     </div>
 
                                     {/* Add similar blocks for other fields */}
                                     
-                                    <div className="col-span-6 sm:col-span-2">
-                                      <label htmlFor="noOfDoctors" className="block text-sm font-medium text-gray-700">
-                                        Number of Doctors
-                                      </label>
-                                      <input
-                                        onChange={handleChange}
-                                        value={hospitalData.noOfDoctors}
-                                        type="text"
-                                        name="noOfDoctors"
-                                        id="noOfDoctors"
-                                        autoComplete="noOfDoctors"
-                                        className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
-                                      />
-                                    </div>
-
-                                    <div className="col-span-6 sm:col-span-2">
-                                      <label htmlFor="noOfWards" className="block text-sm font-medium text-gray-700">
-                                        Number of Wards
-                                      </label>
-                                      <input
-                                        onChange={handleChange}
-                                        value={hospitalData.noOfWards}
-                                        type="text"
-                                        name="noOfWards"
-                                        id="noOfWards"
-                                        autoComplete="noOfWards"
-                                        className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
-                                      />
-                                    </div>
-
-                                    <div className="col-span-6 sm:col-span-2">
-                                      <label htmlFor="noOfBeds" className="block text-sm font-medium text-gray-700">
-                                        Number of Beds
-                                      </label>
-                                      <input
-                                        onChange={handleChange}
-                                        value={hospitalData.noOfBeds}
-                                        type="text"
-                                        name="noOfBeds"
-                                        id="noOfBeds"
-                                        autoComplete="noOfBeds"
-                                        className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
-                                      />
-                                    </div>
-
 
                                     <div className="col-span-6">
                                       <table className="w-full text-sm text-left text-gray-500 ">
                                         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                                           <tr>
                                             <th scope="col" className="p-2">
-                                                Doctor ID
+                                                Supplier ID
                                             </th>
                                             <th scope="col" className="p-2">
                                                 Name 
                                             </th>
                                             <th scope="col" className="p-2">
-                                                Specialization
+                                                Email
+                                            </th>
+                                            <th scope="col" className="p-2">
+                                                Contact No
+                                            </th>
+                                            <th scope="col" className="p-2">
+                                                Location
                                             </th>
                                             <th scope="col" className="p-2">
                                                 Add/Del
@@ -467,7 +404,7 @@ const Hospitals = ({ dbHospitals }) => {
                                         </thead>
                                       
                                         <tbody >
-                                        { hospitalData.doctors.map(( item , index)=>{
+                                        { drugData.suppliers.map(( item , index)=>{
 
                                           return <tr key={index} className="bg-white text-black border-b">
                                           
@@ -475,10 +412,10 @@ const Hospitals = ({ dbHospitals }) => {
 
                                               <input
                                                 type="text"
-                                                onChange={ e=> handleDoctorChange(e, index) }
-                                                value={ item.doctorID }
-                                                name="doctorID"
-                                                id="doctorID"
+                                                onChange={ e=> handleSupplierChange(e, index) }
+                                                value={ item.supplierID }
+                                                name="supplierID"
+                                                id="supplierID"
                                                 className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
                                               />
                                               
@@ -487,10 +424,10 @@ const Hospitals = ({ dbHospitals }) => {
 
                                               <input
                                                 type="text"
-                                                onChange={ e=> handleDoctorChange(e, index) }
-                                                value={ item.name }
-                                                name="name"
-                                                id="name"
+                                                onChange={ e=> handleSupplierChange(e, index) }
+                                                value={ item.supplierName }
+                                                name="supplierName"
+                                                id="supplierName"
                                                 className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
                                               />
                                               
@@ -499,10 +436,34 @@ const Hospitals = ({ dbHospitals }) => {
 
                                               <input
                                                 type="text"
-                                                onChange={ e=> handleDoctorChange(e, index) }
-                                                value={ item.specialization }
-                                                name="specialization"
-                                                id="specialization"
+                                                onChange={ e=> handleSupplierChange(e, index) }
+                                                value={ item.email }
+                                                name="email"
+                                                id="email"
+                                                className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                                              />
+                                              
+                                            </td>
+                                            <td className="p-2">
+
+                                              <input
+                                                type="text"
+                                                onChange={ e=> handleSupplierChange(e, index) }
+                                                value={ item.contactNo }
+                                                name="contactNo"
+                                                id="contactNo"
+                                                className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                                              />
+                                              
+                                            </td>
+                                            <td className="p-2">
+
+                                              <input
+                                                type="text"
+                                                onChange={ e=> handleSupplierChange(e, index) }
+                                                value={ item.location }
+                                                name="location"
+                                                id="location"
                                                 className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
                                               />
                                               
@@ -521,43 +482,13 @@ const Hospitals = ({ dbHospitals }) => {
                                     </div>
 
 
-                                    <div className="col-span-6 sm:col-span-3">
-                                      <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                        Email
-                                      </label>
-                                      <input
-                                        onChange={handleChange}
-                                        value={hospitalData.email}
-                                        type="email"
-                                        name="email"
-                                        id="email"
-                                        autoComplete="email"
-                                        className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
-                                      />
-                                    </div>
-
-                                    <div className="col-span-6 sm:col-span-3">
-                                      <label htmlFor="location" className="block text-sm font-medium text-gray-700">
-                                        Location
-                                      </label>
-                                      <input
-                                        onChange={handleChange}
-                                        value={hospitalData.location}
-                                        type="text"
-                                        name="location"
-                                        id="location"
-                                        autoComplete="location"
-                                        className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
-                                      />
-                                    </div>
-
                                     <div className="col-span-6">
                                       <label htmlFor="desc" className="block text-sm font-medium text-gray-700">
                                         Description
                                       </label>
                                       <textarea
                                         onChange={handleChange}
-                                        value={hospitalData.desc}
+                                        value={drugData.desc}
                                         rows={4}
                                         name="desc"
                                         id="desc"
@@ -608,15 +539,15 @@ export async function getServerSideProps() {
     await mongoose.connect(process.env.MONGO_URI)
   }
   
-  let dbHospitals = await Hospital.find()
+  let dbDrugs = await Drug.find()
 
   // Pass data to the page via props
   return {
     props: {
-      dbHospitals: JSON.parse(JSON.stringify(dbHospitals)),
+      dbDrugs: JSON.parse(JSON.stringify(dbDrugs)),
     }
   }
 }
 
 
-export default Hospitals
+export default Drugs

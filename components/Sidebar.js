@@ -57,15 +57,6 @@ const Sidebar = () => {
           </Link>
           
           
-          <Link href={"/panel/doctors"}>
-            <ListItem>
-              <ListItemPrefix>
-                <FaUserDoctor className='text-xl '/>
-              </ListItemPrefix>
-              Doctors
-            </ListItem>
-          </Link>
-          
           <Link href={"/panel/drugs"}>
             <ListItem>
               <ListItemPrefix>
