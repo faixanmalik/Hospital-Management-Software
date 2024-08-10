@@ -129,9 +129,49 @@ const Hospitals = ({ dbHospitals }) => {
 
   }
 
-  const editEntry = async()=>{}
+  const editEntry = async()=>{
+    const data = { id, hospitalData, path: 'hospitals'};
 
-  const delEntry = async()=>{}
+    let res = await fetch(`/api/editEntry`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    let response = await res.json()
+    if (response.success === true) {
+      setOpen(false)
+      setFilteredHospitals((prevHospitals) =>
+        prevHospitals.map((hospital) =>
+          hospital._id === hospitalData._id ? hospitalData : hospital
+        )
+      );
+    }
+    else {
+      toast.error(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+    }
+
+  }
+
+  const delEntry = async()=>{
+    const data = { selectedIds , path: 'hospitals' };
+    let res = await fetch(`/api/delEntry`, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    let response = await res.json()
+
+    if (response.success === true) {
+      setFilteredHospitals(filteredHospitals.filter(item => !selectedIds.includes(item._id)));
+    }
+    else {
+      toast.error(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+    }
+  }
 
   return (
     <main className="w-full flex min-h-screen bg-gray-100">
@@ -242,7 +282,15 @@ const Hospitals = ({ dbHospitals }) => {
                             
                             {filteredHospitals.length != 0 && filteredHospitals.map((item, index)=>{
 
-                              return <tr key={index} onClick={ ()=> { setHospitalData(item), setOpen(true), setId(item._id), setIsEdit(true) }} className='cursor-pointer border-b border-gray-300 hover:bg-tableHoverColor'>
+                              return <tr key={index} 
+                              // onClick={ ()=> { setHospitalData(item), setOpen(true), setId(item._id), setIsEdit(true) }} 
+                              onClick={(e) => {
+                                if (!e.target.tagName.toLowerCase() === 'input' || e.target.type !== 'checkbox') {
+                                  e.stopPropagation(); setHospitalData(item), setOpen(true), setId(item._id), setIsEdit(true)
+                                }
+                              }}
+                              
+                              className='cursor-pointer border-b border-gray-300 hover:bg-tableHoverColor'>
                               <td className="w-4 p-2.5">
                                 <div className="flex items-center">
                                   <input id="checkbox-table-search-1" type="checkbox" onChange={e => handleRowCheckboxChange(e, item._id)} className="w-4 h-4 text-baseColor bg-gray-100 border-gray-300 rounded focus:ring-0 dark:focus:ring-baseColor dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"/>
