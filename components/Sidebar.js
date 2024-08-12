@@ -37,16 +37,6 @@ const Sidebar = () => {
 
         <div className='h-full'>
           
-          <Link href={"/panel"}>
-            <ListItem>
-              <ListItemPrefix>
-                <PresentationChartBarIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Dashboard
-            </ListItem>
-          </Link>
-
-
           <Link href={"/panel/hospitals"}>
             <ListItem>
               <ListItemPrefix>

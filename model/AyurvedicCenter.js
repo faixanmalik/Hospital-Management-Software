@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const AyurvedicCenterSchema = new mongoose.Schema({
 
-    wellnessCenterID:{type: String},
+    centerID:{type: String},
     name:{type: String},
     email:{type: String},
     contactNo: {type: String},

@@ -48,7 +48,7 @@ export default function Home({ dbHospitals, dbAyurvedicCenters }) {
               href='/panel/doctors'
               title="Doctors"
               subtitle="Total Doctors"
-              amount={dbDoctors.length || 0}
+              amount={0}
               icon={FaUserDoctor}
             />
             <TopCards 

@@ -9,7 +9,7 @@ const Header = ({ showMobmenu }) => {
 
   const [user, setUser] = useState({value: null})
   
-  const [businessName, setBusinessName] = useState('Hospital Management System')
+  let businessName = 'Hospital Management System';
   const router = useRouter()
 
 
@@ -41,10 +41,7 @@ const Header = ({ showMobmenu }) => {
               <MenuItem>info</MenuItem>
               <MenuItem href="/myaccount">Edit Profile</MenuItem>
               <hr className="my-1" />
-              <MenuItem
-                className="!bg-black text-white" 
-                overrideStyles={{ backgroundColor: 'black !important' }}
-              onClick={logout}>Logout</MenuItem>
+              <MenuItem onClick={logout}>Logout</MenuItem>
             </MenuList>
           </Menu>
           
