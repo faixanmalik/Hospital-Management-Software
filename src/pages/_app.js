@@ -13,6 +13,11 @@ export default function App({ Component, pageProps }) {
   //  react top loading bar
   const [progress, setProgress] = useState(0)
 
+
+  const [user, setUser] = useState({value: null})
+  const [key, setKey] = useState(0)
+
+
   //  Use Effect for retain same items in shopping Cart
   useEffect(() => {
     
@@ -42,6 +47,6 @@ export default function App({ Component, pageProps }) {
     
   return <>
     <LoadingBar color='#00c0ab' height={3} progress={progress} waitingTime={300} onLoaderFinished={() => setProgress(0)}/>
-    <Component {...pageProps} />
+    <Component user={user} setUser={setUser} key={key} setKey={setKey} {...pageProps} />
   </>
 }

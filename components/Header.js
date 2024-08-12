@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Avatar, Menu, MenuHandler, MenuItem, MenuList } from "@material-tailwind/react";
 
 
-const Header = ({ showMobmenu }) => {
+const Header = ({ showMobmenu, profileSection }) => {
 
 
   const [user, setUser] = useState({value: null})
@@ -26,7 +26,7 @@ const Header = ({ showMobmenu }) => {
       <div className="flex justify-between items-center">
         <h5 className='font-semibold'>{businessName}</h5>
         
-        <div className="flex space-x-5">
+        <div className="flex space-x-5 ">
 
           <Menu>
             <MenuHandler>
@@ -37,12 +37,12 @@ const Header = ({ showMobmenu }) => {
                 className="p-0.5 cursor-pointer"
               />
             </MenuHandler>
-            <MenuList className="px-1 py-2">
+            {profileSection === true &&  <MenuList className="px-1 py-2">
               <MenuItem>info</MenuItem>
               <MenuItem href="/myaccount">Edit Profile</MenuItem>
               <hr className="my-1" />
               <MenuItem onClick={logout}>Logout</MenuItem>
-            </MenuList>
+            </MenuList>}
           </Menu>
           
         </div>
