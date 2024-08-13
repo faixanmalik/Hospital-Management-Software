@@ -13,6 +13,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { AiOutlineDelete, AiOutlineMedicineBox, AiOutlinePlusCircle } from 'react-icons/ai'
 import DrugSupplier from '@/model/DrugSupplier'
+import { FaMapLocationDot } from 'react-icons/fa6'
 
 
 const DrugsSuppliers = ({ dbDrugsSuppliers }) => {
@@ -152,7 +153,7 @@ const DrugsSuppliers = ({ dbDrugsSuppliers }) => {
 
               <div className='flex justify-between items-center py-2'>
                 <Typography variant="h5" color="blue-gray" className="flex items-center">
-                  <AiOutlineMedicineBox className='mr-2 text-xl' /> DrugsSuppliers ({filteredDrugsSuppliers.length})
+                  <FaMapLocationDot className='mr-2 text-xl' /> DrugsSuppliers ({filteredDrugsSuppliers.length})
                 </Typography>
 
                 <div className='flex space-x-1'>
@@ -164,7 +165,6 @@ const DrugsSuppliers = ({ dbDrugsSuppliers }) => {
                         setSupplierData({
                           supplierID: '',
                           supplierName: '',
-                          drugType: '',
                           joiningDate: '',
                           email: '', 
                           contactNo: '', 
@@ -204,13 +204,10 @@ const DrugsSuppliers = ({ dbDrugsSuppliers }) => {
                                 </div>
                               </td>
                               <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                  Drug ID
+                                  Supplier ID
                               </th>
                               <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                  Drug Name
-                              </th>
-                              <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                  Drug Type
+                                  Supplier Name
                               </th>
                               <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
                                   Email
@@ -243,7 +240,6 @@ const DrugsSuppliers = ({ dbDrugsSuppliers }) => {
                               </td>
                               <td className="text-start px-3 py-2 whitespace-nowrap text-xs font-medium text-gray-800">{item.supplierID}</td>
                               <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.supplierName}</td>
-                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.drugType}</td>
                               <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.email}</td>
                               <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.contactNo}</td>
                               <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.location}</td>
