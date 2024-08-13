@@ -2,6 +2,7 @@ import Hospital from "@/model/Hospital";
 import Drug from "@/model/Drug";
 import AyurvedicCenter from "@/model/AyurvedicCenter";
 import Doctor from "@/model/Doctor";
+import Bed from "@/model/Bed";
 
 export default async function handler(req, res) {
 
@@ -30,6 +31,12 @@ export default async function handler(req, res) {
       const { id, doctorData } = req.body;
 
       await Doctor.updateOne({ _id: id }, doctorData);
+      res.status(200).json({ success: true, message: "Update Successfully!" })
+    }
+    else if (path === 'Beds') {
+      const { id, bedData } = req.body;
+
+      await Bed.updateOne({ _id: id }, bedData);
       res.status(200).json({ success: true, message: "Update Successfully!" })
     }
     

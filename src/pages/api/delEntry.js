@@ -2,6 +2,7 @@ import Drug from "@/model/Drug";
 import Hospital from "@/model/Hospital";
 import AyurvedicCenter from "@/model/AyurvedicCenter";
 import Doctor from "@/model/Doctor";
+import Bed from "@/model/Bed";
 
 export default async function handler(req, res) {
 
@@ -30,6 +31,12 @@ export default async function handler(req, res) {
       const { selectedIds } = req.body;
 
       await Doctor.deleteMany({ _id: { $in: selectedIds } })
+      res.status(200).json({ success: true, message: "Deleted Successfully !" })
+    }
+    else if (path === 'Beds') {
+      const { selectedIds } = req.body;
+
+      await Bed.deleteMany({ _id: { $in: selectedIds } })
       res.status(200).json({ success: true, message: "Deleted Successfully !" })
     }
     
