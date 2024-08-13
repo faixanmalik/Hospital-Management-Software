@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { FaRegHospital, FaUserDoctor } from "react-icons/fa6";
+import { FaMapLocationDot, FaRegHospital, FaUserDoctor } from "react-icons/fa6";
 import { GiHospitalCross } from "react-icons/gi";
-import { FaSignOutAlt } from "react-icons/fa";
+import { FaBed, FaSignOutAlt } from "react-icons/fa";
 import { AiOutlineMedicineBox } from "react-icons/ai";
 
 import {
@@ -15,9 +15,12 @@ import {
   PresentationChartBarIcon,
 } from "@heroicons/react/24/solid";
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 
 const Sidebar = () => {
+
+  const router = useRouter();
 
   // Logout function
   const logout = ()=>{
@@ -38,17 +41,35 @@ const Sidebar = () => {
         <div className='h-full'>
           
           <Link href={"/panel/hospitals"}>
-            <ListItem>
+            <ListItem className={` ${router.asPath === '/panel/hospitals' && 'bg-[#f0f2f4]' } `}>
               <ListItemPrefix>
                 <FaRegHospital className='text-xl '/>
               </ListItemPrefix>
               Hospitals
             </ListItem>
           </Link>
+
+          <Link href={"/panel/doctors"}>
+            <ListItem className={` ${router.asPath === '/panel/doctors' && 'bg-[#f0f2f4]' } `}>
+              <ListItemPrefix>
+                <FaUserDoctor className='text-xl '/>
+              </ListItemPrefix>
+              Doctors
+            </ListItem>
+          </Link>
+
+          <Link href={"/panel/beds"}>
+            <ListItem className={` ${router.asPath === '/panel/beds' && 'bg-[#f0f2f4]' } `}>
+              <ListItemPrefix>
+                <FaBed className='text-xl '/>
+              </ListItemPrefix>
+              Beds
+            </ListItem>
+          </Link>
           
           
           <Link href={"/panel/drugs"}>
-            <ListItem>
+            <ListItem className={` ${router.asPath === '/panel/drugs' && 'bg-[#f0f2f4]' } `}>
               <ListItemPrefix>
                 <AiOutlineMedicineBox className='text-xl '/>
               </ListItemPrefix>
@@ -56,8 +77,19 @@ const Sidebar = () => {
             </ListItem>
           </Link>
 
+          <Link href={"/panel/drugsSuppliers"}>
+            <ListItem className={` ${router.asPath === '/panel/drugsSuppliers' && 'bg-[#f0f2f4]' } `}>
+              <ListItemPrefix>
+                <FaMapLocationDot className='text-xl '/>
+              </ListItemPrefix>
+              Drugs Suppliers
+            </ListItem>
+          </Link>
+
+          
+
           <Link href={"/panel/ayurvedicCenters"}>
-            <ListItem>
+            <ListItem className={` ${router.asPath === '/panel/ayurvedicCenters' && 'bg-[#f0f2f4]' } `}>
               <ListItemPrefix>
                 <GiHospitalCross className='text-xl '/>
               </ListItemPrefix>

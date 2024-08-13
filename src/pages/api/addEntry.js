@@ -1,6 +1,7 @@
 import Drug from "@/model/Drug";
 import Hospital from "@/model/Hospital";
 import AyurvedicCenter from "@/model/AyurvedicCenter";
+import Doctor from "@/model/Doctor";
 
 export default async function handler(req, res) {
 
@@ -28,6 +29,13 @@ export default async function handler(req, res) {
       let newEntry = new AyurvedicCenter(centerData);
       await newEntry.save();
       res.status(200).json({ success: true, data:centerData,  message: "Entry Added!" })
+    }
+    else if (path === 'Doctors') {
+      const { doctorData  } = req.body;
+
+      let newEntry = new Doctor(doctorData);
+      await newEntry.save();
+      res.status(200).json({ success: true, data:doctorData,  message: "Entry Added!" })
     }
 
 

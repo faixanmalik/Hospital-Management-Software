@@ -5,14 +5,9 @@ const DrugSchema = new mongoose.Schema({
     drugID:{type: String},
     drugName:{type: String},
     drugType:{type: String},
-
-    suppliers: [{
-      supplierID: { type: String },
-      name: { type: String },
-      email: { type: String },
-      contactNo: { type: String },
-      location: { type: String },
-    }],
+    email: { type: String },
+    contactNo: { type: String },
+    location: { type: String },
 
     joiningDate: {type: Date},
     desc: {type: String},

@@ -36,50 +36,14 @@ const Drugs = ({ dbDrugs }) => {
     drugID: '',
     drugName: '',
     drugType: '',
-
-    suppliers: [
-      { supplierID: '', name: '', email: '', contactNo: '', location: '', },
-      { supplierID: '', name: '', email: '', contactNo: '', location: '', },
-    ],
+    email: '',
+    location: '',
+    contactNo: '',
     
     joiningDate: '',
     desc: '',
   });
 
-
-  const addLines = () => {
-    setDrugData((prevData) => ({
-      ...prevData,
-      suppliers: [
-        ...prevData.suppliers,
-        { supplierID: '', name: '', email: '', contactNo: '', location: '', },
-      ],
-    }));
-  }
-
-  const delLines = (indexToDelete) => {
-    setDrugData((prevData) => {
-      const updatedData = prevData.suppliers.filter((_, index) => index !== indexToDelete);
-      return {
-        ...prevData,
-        suppliers: updatedData,
-      };
-    });
-  };
-
-  const handleSupplierChange = (e, index) => {
-
-    const { name, value } = e.target;
-    setDrugData((prevData) => {
-      const updatedData = prevData.suppliers.map((item, i) =>
-        i === index ? { ...item, [name]: value } : item
-      );
-      return {
-        ...prevData,
-        suppliers: updatedData,
-      };
-    });
-  }
 
   // Handle input changes for top-level fields
   const handleChange = (e) => {
@@ -204,11 +168,9 @@ const Drugs = ({ dbDrugs }) => {
                           drugName: '',
                           drugType: '',
                           joiningDate: '',
-
-                          suppliers: [
-                            { supplierID: '', name: '', email: '', contactNo: '', location: '', },
-                            { supplierID: '', name: '', email: '', contactNo: '', location: '', },
-                          ],
+                          email: '', 
+                          contactNo: '', 
+                          location: '',
                           desc: '',
                         });
                         
@@ -253,7 +215,13 @@ const Drugs = ({ dbDrugs }) => {
                                   Drug Type
                               </th>
                               <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                  No of Suppliers
+                                  Email
+                              </th>
+                              <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
+                                  Contact No
+                              </th>
+                              <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
+                                  Location
                               </th>
                               
                             </tr>
@@ -278,7 +246,9 @@ const Drugs = ({ dbDrugs }) => {
                               <td className="text-start px-3 py-2 whitespace-nowrap text-xs font-medium text-gray-800">{item.drugID}</td>
                               <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.drugName}</td>
                               <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.drugType}</td>
-                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.suppliers.length}</td>
+                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.email}</td>
+                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.contactNo}</td>
+                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.location}</td>
                               
                             </tr>
                             })}
@@ -375,110 +345,51 @@ const Drugs = ({ dbDrugs }) => {
                                       />
                                     </div>
 
-                                    {/* Add similar blocks for other fields */}
-                                    
 
-                                    <div className="col-span-6">
-                                      <table className="w-full text-sm text-left text-gray-500 ">
-                                        <thead className="text-xs text-gray-700 uppercase bg-gray-50">
-                                          <tr>
-                                            <th scope="col" className="p-2">
-                                                Supplier ID
-                                            </th>
-                                            <th scope="col" className="p-2">
-                                                Name 
-                                            </th>
-                                            <th scope="col" className="p-2">
-                                                Email
-                                            </th>
-                                            <th scope="col" className="p-2">
-                                                Contact No
-                                            </th>
-                                            <th scope="col" className="p-2">
-                                                Location
-                                            </th>
-                                            <th scope="col" className="p-2">
-                                                Add/Del
-                                            </th>
-                                          </tr>
-                                        </thead>
-                                      
-                                        <tbody >
-                                        { drugData.suppliers.map(( item , index)=>{
+                                    <div className="col-span-6 sm:col-span-2">
+                                      <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                                        Email
+                                      </label>
+                                      <input
+                                        onChange={handleChange}
+                                        value={drugData.email}
+                                        type="email"
+                                        name="email"
+                                        id="email"
+                                        autoComplete="email"
+                                        className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
+                                      />
+                                    </div>
 
-                                          return <tr key={index} className="bg-white text-black border-b">
-                                          
-                                            <td className="p-2">
+                                    <div className="col-span-6 sm:col-span-2">
+                                      <label htmlFor="contactNo" className="block text-sm font-medium text-gray-700">
+                                        Contact No
+                                      </label>
+                                      <input
+                                        onChange={handleChange}
+                                        value={drugData.contactNo}
+                                        type="text"
+                                        name="contactNo"
+                                        id="contactNo"
+                                        autoComplete="contactNo"
+                                        className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
+                                      />
+                                    </div>
 
-                                              <input
-                                                type="text"
-                                                onChange={ e=> handleSupplierChange(e, index) }
-                                                value={ item.supplierID }
-                                                name="supplierID"
-                                                id="supplierID"
-                                                className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
-                                              />
-                                              
-                                            </td>
-                                            <td className="p-2">
 
-                                              <input
-                                                type="text"
-                                                onChange={ e=> handleSupplierChange(e, index) }
-                                                value={ item.supplierName }
-                                                name="supplierName"
-                                                id="supplierName"
-                                                className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
-                                              />
-                                              
-                                            </td>
-                                            <td className="p-2">
-
-                                              <input
-                                                type="text"
-                                                onChange={ e=> handleSupplierChange(e, index) }
-                                                value={ item.email }
-                                                name="email"
-                                                id="email"
-                                                className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
-                                              />
-                                              
-                                            </td>
-                                            <td className="p-2">
-
-                                              <input
-                                                type="text"
-                                                onChange={ e=> handleSupplierChange(e, index) }
-                                                value={ item.contactNo }
-                                                name="contactNo"
-                                                id="contactNo"
-                                                className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
-                                              />
-                                              
-                                            </td>
-                                            <td className="p-2">
-
-                                              <input
-                                                type="text"
-                                                onChange={ e=> handleSupplierChange(e, index) }
-                                                value={ item.location }
-                                                name="location"
-                                                id="location"
-                                                className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
-                                              />
-                                              
-                                            </td>
-                                            
-                                            <td className="p-1 flex items-center mt-[18px]">
-                                              
-                                              <button type='button' className='mx-auto' onClick={addLines}><AiOutlinePlusCircle className='text-xl text-green-600'/></button>
-                                              <button type='button' className='mx-auto'><AiOutlineDelete onClick={()=>index != 0 && delLines(index)} className='text-xl text-red-700'/></button>
-                                            </td>
-
-                                          </tr>})}
-                                            
-                                        </tbody>
-                                      </table>
+                                    <div className="col-span-6 sm:col-span-2">
+                                      <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+                                        Location
+                                      </label>
+                                      <input
+                                        onChange={handleChange}
+                                        value={drugData.location}
+                                        type="text"
+                                        name="location"
+                                        id="location"
+                                        autoComplete="location"
+                                        className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
+                                      />
                                     </div>
 
 

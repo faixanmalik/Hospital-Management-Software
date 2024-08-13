@@ -7,11 +7,6 @@ const HospitalSchema = new mongoose.Schema({
     email:{type: String},
     location: {type: String},
     contactNo: {type: String},
-    doctors: [{
-      doctorID: { type: String },
-      name: { type: String },
-      specialization: { type: String },
-    }],
     noOfDoctors: {type: String},
     noOfWards: {type: String},
     noOfBeds: {type: String},
