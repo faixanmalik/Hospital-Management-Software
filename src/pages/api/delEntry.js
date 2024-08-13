@@ -3,6 +3,7 @@ import Hospital from "@/model/Hospital";
 import AyurvedicCenter from "@/model/AyurvedicCenter";
 import Doctor from "@/model/Doctor";
 import Bed from "@/model/Bed";
+import DrugSupplier from "@/model/DrugSupplier";
 
 export default async function handler(req, res) {
 
@@ -19,6 +20,12 @@ export default async function handler(req, res) {
       const { selectedIds } = req.body;
 
       await Drug.deleteMany({ _id: { $in: selectedIds } })
+      res.status(200).json({ success: true, message: "Deleted Successfully !" })
+    }
+    else if (path === 'DrugsSuppliers') {
+      const { selectedIds } = req.body;
+
+      await DrugSupplier.deleteMany({ _id: { $in: selectedIds } })
       res.status(200).json({ success: true, message: "Deleted Successfully !" })
     }
     else if (path === 'ayurvedicCenters') {

@@ -3,6 +3,7 @@ import Hospital from "@/model/Hospital";
 import AyurvedicCenter from "@/model/AyurvedicCenter";
 import Doctor from "@/model/Doctor";
 import Bed from "@/model/Bed";
+import DrugSupplier from "@/model/DrugSupplier";
 
 export default async function handler(req, res) {
 
@@ -23,6 +24,13 @@ export default async function handler(req, res) {
       let newEntry = new Drug(drugData);
       await newEntry.save();
       res.status(200).json({ success: true, data:drugData,  message: "Entry Added!" })
+    }
+    else if (path === 'DrugsSuppliers') {
+      const { supplierData  } = req.body;
+
+      let newEntry = new DrugSupplier(supplierData);
+      await newEntry.save();
+      res.status(200).json({ success: true, data:supplierData,  message: "Entry Added!" })
     }
     else if (path === 'ayurvedicCenters') {
       const { centerData  } = req.body;
