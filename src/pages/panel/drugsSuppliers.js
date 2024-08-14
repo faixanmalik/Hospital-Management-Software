@@ -153,7 +153,7 @@ const DrugsSuppliers = ({ dbDrugsSuppliers }) => {
 
               <div className='flex justify-between items-center py-2'>
                 <Typography variant="h5" color="blue-gray" className="flex items-center">
-                  <FaMapLocationDot className='mr-2 text-xl' /> DrugsSuppliers ({filteredDrugsSuppliers.length})
+                  <FaMapLocationDot className='mr-2 text-xl' /> Drugs Suppliers ({filteredDrugsSuppliers.length})
                 </Typography>
 
                 <div className='flex space-x-1'>
@@ -179,7 +179,7 @@ const DrugsSuppliers = ({ dbDrugsSuppliers }) => {
                     className="bg-baseColor hover:bg-hoverBaseColor flex items-center px-3 py-2 text-xs font-semibold text-cardColor border-none rounded-md"
                   >
                     <FaPlus className='mr-1' />
-                    Add Drug
+                    Add Supplier
                   </button>
 
                   <button onClick={()=>delEntry()} className="bg-deleteColor hover:bg-hoverDeleteColor flex items-center px-3 py-2 text-xs font-semibold text-cardColor border-none rounded-md">
@@ -272,7 +272,7 @@ const DrugsSuppliers = ({ dbDrugsSuppliers }) => {
               <div className="fixed inset-0 z-10 overflow-y-auto">
                 <div className="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
                   <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 translate-y-4 md:translate-y-0 md:scale-95" enterTo="opacity-100 translate-y-0 md:scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 translate-y-0 md:scale-100" leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95">
-                    <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-6xl">
+                    <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
                       <div className="relative flex w-full items-center overflow-hidden bg-white px-4 pt-14 pb-8 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
                         <button type="button" className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-6 lg:right-8" onClick={() => setOpen(false)}>
                           <span className="sr-only">Close</span>
@@ -284,7 +284,7 @@ const DrugsSuppliers = ({ dbDrugsSuppliers }) => {
                             <div className="md:grid md:grid-cols-1 md:gap-6">
                               <div className="md:col-span-1">
                                 <div className="px-4 sm:px-0">
-                                  <h3 className="text-lg font-medium leading-6 text-gray-900">Add Drug</h3>
+                                  <h3 className="text-lg font-medium leading-6 text-gray-900">Add Drug Supplier</h3>
                                 </div>
                               </div>
                               <div className="mt-2 text-black md:col-span-2 md:mt-0 w-full">
@@ -323,7 +323,7 @@ const DrugsSuppliers = ({ dbDrugsSuppliers }) => {
                                     </div>
 
 
-                                    <div className="col-span-6 sm:col-span-2">
+                                    <div className="col-span-6 sm:col-span-3">
                                       <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                         Email
                                       </label>
@@ -354,7 +354,7 @@ const DrugsSuppliers = ({ dbDrugsSuppliers }) => {
                                     </div>
 
 
-                                    <div className="col-span-6 sm:col-span-2">
+                                    <div className="col-span-6 sm:col-span-4">
                                       <label htmlFor="location" className="block text-sm font-medium text-gray-700">
                                         Location
                                       </label>
