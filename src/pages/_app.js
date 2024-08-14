@@ -1,6 +1,8 @@
 import "@/src/styles/globals.css";
 import '@/src/styles/scrollbar.css';
 
+import { ThemeProvider } from "@material-tailwind/react";
+
 // React top loading bar
 import LoadingBar from 'react-top-loading-bar'
 import { useRouter } from 'next/router';
@@ -46,7 +48,10 @@ export default function App({ Component, pageProps }) {
   }
     
   return <>
-    <LoadingBar color='#00c0ab' height={3} progress={progress} waitingTime={300} onLoaderFinished={() => setProgress(0)}/>
-    <Component user={user} setUser={setUser} key={key} setKey={setKey} {...pageProps} />
+    <ThemeProvider>
+      <LoadingBar color='#00c0ab' height={3} progress={progress} waitingTime={300} onLoaderFinished={() => setProgress(0)}/>
+      <Component user={user} setUser={setUser} key={key} setKey={setKey} {...pageProps} />
+
+    </ThemeProvider>
   </>
 }
