@@ -3,10 +3,12 @@ import Link from 'next/link'
 import Header from "@/components/Header";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from "next/router";
 
 
 const AdminLogin = () => {
 
+  const router = useRouter();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -40,7 +42,7 @@ const AdminLogin = () => {
       toast.success(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
       localStorage.setItem('myUser', JSON.stringify({token: response.token, email: response.email}))
       setTimeout(() => {
-        window.location.href = "/panel/hospitals";
+        router.push(`/panel/hospitals`);
       }, 1500);
     }
     else{
