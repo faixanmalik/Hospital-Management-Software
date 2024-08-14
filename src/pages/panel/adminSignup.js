@@ -35,23 +35,23 @@ const AdminSignup = () => {
     }
     else{
       document.getElementById('checkPassword').innerHTML = ""
-      let res = await fetch(`/api/adminSignup`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-      let response = await res.json();
-      if (response.success === true) {
-        setEmail('')
-        setPassword('')
-        setConfirmpassword('')
-        toast.success(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-      }
-      else{
-        toast.error(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-      }
+      // let res = await fetch(`/api/adminSignup`, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(data),
+      // })
+      // let response = await res.json();
+      // if (response.success === true) {
+      //   setEmail('')
+      //   setPassword('')
+      //   setConfirmpassword('')
+      //   toast.success(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+      // }
+      // else{
+        toast.error('Internal Server Error' , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+      // }
       
     }
   }
