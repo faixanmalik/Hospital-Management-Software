@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { FaMapLocationDot, FaRegHospital, FaUserDoctor } from "react-icons/fa6";
+import { FaMapLocationDot, FaMaskFace, FaRegHospital, FaUserDoctor } from "react-icons/fa6";
 import { GiHospitalCross } from "react-icons/gi";
 import { FaBed, FaSignOutAlt } from "react-icons/fa";
 import { AiOutlineMedicineBox } from "react-icons/ai";
@@ -55,6 +55,15 @@ const Sidebar = () => {
                 <FaUserDoctor className='text-xl '/>
               </ListItemPrefix>
               Doctors
+            </ListItem>
+          </Link>
+
+          <Link href={"/panel/patients"}>
+            <ListItem className={` ${router.asPath === '/panel/patients' && 'bg-[#f0f2f4]' } `}>
+              <ListItemPrefix>
+                <FaMaskFace className='text-xl '/>
+              </ListItemPrefix>
+              Patients
             </ListItem>
           </Link>
 
