@@ -14,6 +14,7 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 import { AiOutlineDelete, AiOutlineMedicineBox, AiOutlinePlusCircle } from 'react-icons/ai'
 import Bed from '@/model/Bed'
 import Hospital from '@/model/Hospital'
+import ReactSelect from 'react-select'
 
 
 const Beds = ({ dbBeds, dbHospitals }) => {
