@@ -48,10 +48,10 @@ export default function App({ Component, pageProps }) {
   }
     
   return <>
-    <ThemeProvider>
-      <LoadingBar color='#00c0ab' height={3} progress={progress} waitingTime={300} onLoaderFinished={() => setProgress(0)}/>
-      <Component user={user} setUser={setUser} key={key} setKey={setKey} {...pageProps} />
+  <ThemeProvider>
+    <LoadingBar color='#00c0ab' height={3} progress={progress} waitingTime={300} onLoaderFinished={() => setProgress(0)}/>
+    <Component user={user} setUser={setUser} key={key} setKey={setKey} {...pageProps} />
 
-    </ThemeProvider>
+  </ThemeProvider>
   </>
 }

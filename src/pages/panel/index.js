@@ -1,7 +1,6 @@
-import Header from "@/components/Header";
 import AdminLogin from "./adminLogin";
 
-export default function Home({  }) {
+export default function Home() {
 
   return (
     <>
