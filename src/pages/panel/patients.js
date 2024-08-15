@@ -15,6 +15,7 @@ import { AiOutlineDelete, AiOutlineMedicineBox, AiOutlinePlusCircle } from 'reac
 import User from '@/model/User'
 import moment from 'moment/moment'
 import { FaMaskFace } from 'react-icons/fa6'
+import withAuth from '@/middleware/withAuth'
 
 
 const Patients = ({ dbPatients }) => {
