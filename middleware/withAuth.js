@@ -5,22 +5,28 @@ const withAuth = (WrappedComponent) => {
   return (props) => {
     const router = useRouter();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
       // Check if JWT token is in localStorage
       const myUser = localStorage.getItem("myUser");
-      const token = myUser.token;
 
-      if (token) {
-        setIsAuthenticated(true); // Set authentication state to true if token exists
+      if (myUser) {
+        setIsAuthenticated(true);
       } else {
-        // If no token is found, redirect to login page
         router.push("/panel");
       }
+
+      setIsLoading(false); // Authentication check is complete
     }, [router]);
 
-    // If not authenticated, don't render the wrapped component
+    if (isLoading) {
+      // Optionally, you can show a loading spinner or placeholder
+      return <div>Loading...</div>;
+    }
+
     if (!isAuthenticated) {
+      // Prevent rendering the component if not authenticated
       return null;
     }
 
