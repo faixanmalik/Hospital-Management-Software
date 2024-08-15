@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Header from "@/components/Header";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import withAuth from "@/middleware/withAuth";
 
 
 const AdminSignup = () => {
@@ -107,4 +108,4 @@ const AdminSignup = () => {
   )
 }
 
-export default AdminSignup
+export default withAuth(AdminSignup)

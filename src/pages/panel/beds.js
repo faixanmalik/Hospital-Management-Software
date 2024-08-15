@@ -15,6 +15,7 @@ import { AiOutlineDelete, AiOutlineMedicineBox, AiOutlinePlusCircle } from 'reac
 import Bed from '@/model/Bed'
 import Hospital from '@/model/Hospital'
 import ReactSelect from 'react-select'
+import withAuth from '@/middleware/withAuth'
 
 
 const Beds = ({ dbBeds, dbHospitals }) => {
@@ -453,4 +454,4 @@ export async function getServerSideProps() {
 }
 
 
-export default Beds
+export default withAuth(Beds)

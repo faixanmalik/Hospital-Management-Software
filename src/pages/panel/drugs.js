@@ -13,6 +13,7 @@ import { FaPlus } from "react-icons/fa";
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { AiOutlineDelete, AiOutlineMedicineBox, AiOutlinePlusCircle } from 'react-icons/ai'
+import withAuth from '@/middleware/withAuth'
 
 
 const Drugs = ({ dbDrugs }) => {
@@ -461,4 +462,4 @@ export async function getServerSideProps() {
 }
 
 
-export default Drugs
+export default withAuth(Drugs)

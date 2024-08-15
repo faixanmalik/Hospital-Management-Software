@@ -13,6 +13,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import AyurvedicCenter from '@/model/AyurvedicCenter'
 import { GiHospitalCross } from 'react-icons/gi'
+import withAuth from '@/middleware/withAuth'
 
 
 const AyurvedicCenters = ({ dbAyurvedicCenters }) => {
@@ -438,4 +439,4 @@ export async function getServerSideProps() {
 }
 
 
-export default AyurvedicCenters
+export default withAuth(AyurvedicCenters)

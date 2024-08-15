@@ -12,6 +12,7 @@ import { MdDelete } from "react-icons/md";
 import { FaPlus, FaRegHospital } from "react-icons/fa";
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/solid'
+import withAuth from '@/middleware/withAuth'
 
 
 const Hospitals = ({ dbHospitals }) => {
@@ -502,4 +503,4 @@ export async function getServerSideProps() {
 }
 
 
-export default Hospitals
+export default withAuth(Hospitals);

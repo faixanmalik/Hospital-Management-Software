@@ -14,6 +14,7 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 import { AiOutlineDelete, AiOutlineMedicineBox, AiOutlinePlusCircle } from 'react-icons/ai'
 import DrugSupplier from '@/model/DrugSupplier'
 import { FaMapLocationDot } from 'react-icons/fa6'
+import withAuth from '@/middleware/withAuth'
 
 
 const DrugsSuppliers = ({ dbDrugsSuppliers }) => {
@@ -438,4 +439,4 @@ export async function getServerSideProps() {
 }
 
 
-export default DrugsSuppliers
+export default withAuth(DrugsSuppliers)

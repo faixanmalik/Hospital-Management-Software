@@ -473,4 +473,4 @@ export async function getServerSideProps() {
 }
 
 
-export default Patients
+export default withAuth(Patients)

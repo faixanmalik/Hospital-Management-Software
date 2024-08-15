@@ -16,6 +16,7 @@ import Doctor from '@/model/Doctor'
 import { FaUserDoctor } from 'react-icons/fa6'
 import Hospital from '@/model/Hospital'
 import ReactSelect from 'react-select'
+import withAuth from '@/middleware/withAuth'
 
 
 const Doctors = ({ dbDoctors, dbHospitals }) => {
@@ -526,4 +527,4 @@ export async function getServerSideProps() {
 }
 
 
-export default Doctors
+export default withAuth(Doctors)
