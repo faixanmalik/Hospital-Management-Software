@@ -6,14 +6,10 @@ var jwt = require('jsonwebtoken');
 
 const handler = async (req,res)=>{
   if (req.method == 'POST'){
-    
-    let user = await User.findOne(
-      {
-        "email": req.body.email,
-        "userType": 'Admin'
-      }
-    )
 
+    
+    let user = await User.findOne({ "email": req.body.email, "userType": 'Admin' })
+    
     if (user){
 
       if (req.body.email === user.email && req.body.password === user.password){
