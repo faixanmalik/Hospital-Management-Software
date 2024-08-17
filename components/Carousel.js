@@ -10,7 +10,7 @@ const Carousel = () => {
         <h1 className='text-gray-600 text-sm'>At Your Health Matters, we're dedicated to providing comprehensive medical care to help you achieve optimal health and wellness.</h1>
 
         <button className="bg-baseColor hover:bg-hoverBaseColor flex items-center px-3 py-2 text-xs font-semibold text-cardColor border-none rounded-md">
-          Find a Doctor
+          Book an Appointment
         </button>
 
       </div>
