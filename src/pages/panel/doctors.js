@@ -40,6 +40,7 @@ const Doctors = ({ dbDoctors, dbHospitals }) => {
     doctorID: '',
     name: '',
     specialization: '',
+    courses: '',
     hospital: '',
     email: '',
     contactNo: '',
@@ -175,6 +176,7 @@ const Doctors = ({ dbDoctors, dbHospitals }) => {
                           doctorID: '',
                           name: '',
                           specialization: '',
+                          courses: '',
                           hospital: '',
                           email: '',
                           contactNo: '',
@@ -377,6 +379,21 @@ const Doctors = ({ dbDoctors, dbHospitals }) => {
                                     </div>
 
                                     <div className="col-span-6 sm:col-span-3">
+                                      <label htmlFor="courses" className="block text-sm font-medium text-gray-700">
+                                        Courses
+                                      </label>
+                                      <input
+                                        onChange={handleChange}
+                                        value={doctorData.courses}
+                                        type="text"
+                                        name="courses"
+                                        id="courses"
+                                        autoComplete="courses"
+                                        className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
+                                      />
+                                    </div>
+
+                                    <div className="col-span-6 sm:col-span-3">
                                       <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                         Email
                                       </label>
@@ -407,7 +424,7 @@ const Doctors = ({ dbDoctors, dbHospitals }) => {
                                     </div>
 
 
-                                    <div className="col-span-6 sm:col-span-3">
+                                    <div className="col-span-6 sm:col-span-2">
                                       <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
                                         Gender
                                       </label>
@@ -426,7 +443,7 @@ const Doctors = ({ dbDoctors, dbHospitals }) => {
                                       />
                                     </div>
 
-                                    <div className="col-span-6 sm:col-span-3">
+                                    <div className="col-span-6 sm:col-span-2">
                                       <label htmlFor="age" className="block text-sm font-medium text-gray-700">
                                         Age
                                       </label>
@@ -441,7 +458,7 @@ const Doctors = ({ dbDoctors, dbHospitals }) => {
                                       />
                                     </div>
 
-                                    <div className="col-span-6 sm:col-span-3">
+                                    <div className="col-span-6 sm:col-span-2">
                                       <label htmlFor="dob" className="block text-sm font-medium text-gray-700">
                                         Date of Birth
                                       </label>
