@@ -16,8 +16,8 @@ const Card = () => {
       href: '',
     },
     {
-      title: "Women's Health",
-      desc: "We offer a range of women's health services, including gynecological exams, prenatal care, and menopause management.",
+      title: 'Women&apos;s Health',
+      desc: 'We offer a range of women&apos;s health services, including gynecological exams, prenatal care, and menopause management.',
       src: '/service3.png',
       href: '',
     },
