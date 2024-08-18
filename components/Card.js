@@ -30,8 +30,8 @@ const Card = () => {
       <div className='flex justify-between px-3'>
         
         
-        {data.map((item)=>{ 
-          return <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        {data.map((item, index)=>{ 
+          return <div key={index} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <a href="#">
             <img className="rounded-t-lg w-full" src={`${item.src}`} alt="" />
           </a>
