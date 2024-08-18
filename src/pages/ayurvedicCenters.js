@@ -29,9 +29,9 @@ const ayurvedicCenters = ({ dbAyurvedicCenters }) => {
         <div className='grid grid-cols-6 gap-6 px-3'>
           
           
-          {dbAyurvedicCenters.length > 0 && dbAyurvedicCenters.map((item)=>{
+          {dbAyurvedicCenters.length > 0 && dbAyurvedicCenters.map((item, index)=>{
             
-            return <Link href={'/'} className="col-span-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            return <Link key={index} href={'/'} className="col-span-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
               <img className="rounded-t-lg object-cover object-top h-96 w-full" src={ getRandomImage(centerSrc) } alt="" />
               <div className="py-4 px-2">
                 
