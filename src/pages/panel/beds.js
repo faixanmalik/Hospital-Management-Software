@@ -341,7 +341,7 @@ const Beds = ({ dbBeds, dbHospitals }) => {
                                         id='wardName' 
                                         name="wardName"
                                         className='mt-1'
-                                        value={{ value: bedData.wardName, label: doctorData.wardName || 'Select' }}
+                                        value={{ value: bedData.wardName, label: bedData.wardName || 'Select' }}
                                         onChange={selectedOption => handleChange({ target: { name: 'wardName', value: selectedOption.value } })}
                                         options={
                                           [
