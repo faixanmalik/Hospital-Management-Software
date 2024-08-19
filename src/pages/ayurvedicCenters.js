@@ -8,7 +8,13 @@ import AyurvedicCenter from '@/model/AyurvedicCenter'
 const ayurvedicCenters = ({ dbAyurvedicCenters }) => {
 
 
-  let centerSrc = [ 'female2.png']
+  let images = [ 
+    'https://plus.unsplash.com/premium_photo-1682130157004-057c137d96d5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG9zcGl0YWx8ZW58MHx8MHx8fDA%3D', 
+    'https://images.unsplash.com/photo-1512678080530-7760d81faba6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG9zcGl0YWx8ZW58MHx8MHx8fDA%3D',
+    'https://images.unsplash.com/photo-1512102438733-bfa4ed29aef7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG9zcGl0YWx8ZW58MHx8MHx8fDA%3D',
+    'https://plus.unsplash.com/premium_photo-1664475477169-46b784084d4e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8aG9zcGl0YWx8ZW58MHx8MHx8fDA%3D',
+    'https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjN8fGhvc3BpdGFsfGVufDB8fDB8fHww',
+  ]
 
   // Function to pick a random image
   function getRandomImage(array) {
@@ -32,7 +38,7 @@ const ayurvedicCenters = ({ dbAyurvedicCenters }) => {
           {dbAyurvedicCenters.length > 0 && dbAyurvedicCenters.map((item, index)=>{
             
             return <Link key={index} href={'/'} className="col-span-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <img className="rounded-t-lg object-cover object-top h-96 w-full" src={ getRandomImage(centerSrc) } alt="" />
+              <img className="rounded-t-lg object-cover object-top h-96 w-full" src={ getRandomImage(images) } alt="" />
               <div className="py-4 px-2">
                 
                 <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{item.name}</h5>
