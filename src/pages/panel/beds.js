@@ -103,8 +103,8 @@ const Beds = ({ dbBeds, dbHospitals }) => {
     if (response.success === true) {
       setOpen(false)
       setFilteredBeds((prevBeds) =>
-        prevBeds.map((drug) =>
-          drug._id === bedData._id ? bedData : drug
+        prevBeds.map((bed) =>
+          bed._id === bedData._id ? bedData : bed
         )
       );
     }
@@ -164,7 +164,7 @@ const Beds = ({ dbBeds, dbHospitals }) => {
 
                         setOpen(true),
                         setBedData({
-                          drugID: '',
+                          bedID: '',
                           hospitalName: '',
                           wardName: '',
                           joiningDate: '',
@@ -181,7 +181,7 @@ const Beds = ({ dbBeds, dbHospitals }) => {
                     className="bg-baseColor hover:bg-hoverBaseColor flex items-center px-3 py-2 text-xs font-semibold text-cardColor border-none rounded-md"
                   >
                     <FaPlus className='mr-1' />
-                    Add Drug
+                    Add Bed
                   </button>
 
                   <button onClick={()=>delEntry()} className="bg-deleteColor hover:bg-hoverDeleteColor flex items-center px-3 py-2 text-xs font-semibold text-cardColor border-none rounded-md">
@@ -212,16 +212,13 @@ const Beds = ({ dbBeds, dbHospitals }) => {
                                   Hospital Name
                               </th>
                               <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                  Drug Type
+                                  Ward Name
                               </th>
                               <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                  availableBeds
+                                  Available Beds
                               </th>
                               <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                  Contact No
-                              </th>
-                              <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                  totalBeds
+                                  tTotal Beds
                               </th>
                               
                             </tr>
@@ -243,11 +240,10 @@ const Beds = ({ dbBeds, dbHospitals }) => {
                                   <input id="checkbox-table-search-1" type="checkbox" onChange={e => handleRowCheckboxChange(e, item._id)} className="w-4 h-4 text-baseColor bg-gray-100 border-gray-300 rounded focus:ring-0 dark:focus:ring-baseColor dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"/>
                                 </div>
                               </td>
-                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs font-medium text-gray-800">{item.drugID}</td>
+                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs font-medium text-gray-800">{item.bedID}</td>
                               <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.hospitalName}</td>
                               <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.wardName}</td>
                               <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.availableBeds}</td>
-                              <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.contactNo}</td>
                               <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-gray-800">{item.totalBeds}</td>
                               
                             </tr>
@@ -290,7 +286,7 @@ const Beds = ({ dbBeds, dbHospitals }) => {
                             <div className="md:grid md:grid-cols-1 md:gap-6">
                               <div className="md:col-span-1">
                                 <div className="px-4 sm:px-0">
-                                  <h3 className="text-lg font-medium leading-6 text-gray-900">Add Drug</h3>
+                                  <h3 className="text-lg font-medium leading-6 text-gray-900">Add Bed</h3>
                                 </div>
                               </div>
                               <div className="mt-2 text-black md:col-span-2 md:mt-0 w-full">
