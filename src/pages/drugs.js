@@ -8,7 +8,7 @@ import Link from 'next/link'
 const Drugs = ({ dbDrugs }) => {
 
 
-  let images = [ 
+  let images = [
     'https://plus.unsplash.com/premium_photo-1672163163579-e5d4aedd26af?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVkaWNpbmVzfGVufDB8fDB8fHww', 
     'https://images.unsplash.com/photo-1573207185685-5109f337fdf6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVkaWNpbmVzfGVufDB8fDB8fHww',
     'https://images.unsplash.com/photo-1600091474842-83bb9c05a723?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWVkaWNpbmVzfGVufDB8fDB8fHww',
