@@ -32,7 +32,7 @@ const Doctors = ({ dbDoctors }) => {
           
           {dbDoctors.length > 0 && dbDoctors.map((item, index)=>{
             
-            return <Link key={index} href={'/'} className="col-span-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            return <div key={index} className="col-span-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
               <img className="rounded-t-lg object-cover object-top h-96 w-full" src={` ${ item.gender === 'Male' ? getRandomImage(maleSrc) : getRandomImage(femaleSrc) }`} alt="" />
               <div className="py-4 px-2">
                 
@@ -41,12 +41,12 @@ const Doctors = ({ dbDoctors }) => {
 
                 <p className="mb-2 text-sm font-normal tracking-wider text-gray-600 dark:text-gray-400">{item.courses}</p>
                 
-                <button href={'#'} className="mt-10 flex justify-center mx-auto w-full  text-sm font-medium text-white py-2 bg-baseColor rounded-lg hover:bg-hoverBaseColor">
+                <Link href={`/doctorDetail?id=${item._id}`} className="mt-10 flex justify-center mx-auto w-full  text-sm font-medium text-white py-2 bg-baseColor rounded-lg hover:bg-hoverBaseColor">
                   Book an appointment
-                </button>
+                </Link>
                 
               </div>
-          </Link>})}
+          </div>})}
           
 
           {dbDoctors.length === 0 && <div className='w-full col-span-6'>
@@ -57,8 +57,6 @@ const Doctors = ({ dbDoctors }) => {
         </div>
     
       </div>
-
-
 
       <Footer/>
     </div>
