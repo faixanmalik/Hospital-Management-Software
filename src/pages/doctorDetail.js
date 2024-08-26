@@ -44,7 +44,7 @@ const DoctorDetail = ({ dbDoctors }) => {
       <Navbar />
       <div className='py-14 min-h-screen'>
 
-        <h2 className="mb-8 lg:mb-16 text-3xl font-semibold tracking-wide leading-tight text-center text-gray-900 dark:text-white md:text-4xl">Doctor Detail</h2>
+        {doctor && <h2 className="mb-8 lg:mb-16 text-3xl font-semibold tracking-wide leading-tight text-center text-gray-900 dark:text-white md:text-4xl">Doctor Detail</h2>}
         
         {doctor && <div className='flex space-x-10 px-20'>
           
@@ -108,7 +108,7 @@ const DoctorDetail = ({ dbDoctors }) => {
 
           </div>
           <div className='w-1/2 bg-red-50'>
-            
+
           </div>
 
         </div>}
