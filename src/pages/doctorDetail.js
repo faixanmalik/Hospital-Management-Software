@@ -9,6 +9,7 @@ import { FaPhoneAlt, FaUserAlt } from 'react-icons/fa'
 import { FaRegHospital, FaTransgender } from 'react-icons/fa6'
 import { MdEmail } from 'react-icons/md'
 import { TiTick } from "react-icons/ti";
+import ReactSelect from 'react-select'
 
 const DoctorDetail = ({ dbDoctors }) => {
 
@@ -17,12 +18,20 @@ const DoctorDetail = ({ dbDoctors }) => {
 
 
   const [doctor, setDoctor] = useState(null)
+  const [appointmentData, setAppointmentData] = useState({
+    doctorName: '',
+    name: '',
+    doctorID: '',
+    email: '',
+    message: '',
+    appointmentDate: '',
+    appointmentTime: '',
+  })
 
   useEffect(() => {
     const doctor = dbDoctors.filter((item)=>{
       return item._id === id;
     })
-    console.log(doctor[0])
     setDoctor(doctor[0])
   }, [id])
   
@@ -36,6 +45,42 @@ const DoctorDetail = ({ dbDoctors }) => {
   function getRandomImage(array) {
     const randomIndex = Math.floor(Math.random() * array.length);
     return array[randomIndex];
+  }
+
+
+  // Handle input changes for top-level fields
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setAppointmentData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+
+  const submit = async(e)=>{
+    e.preventDefault();
+
+    const data = { appointmentData, path:'Doctors' }
+
+    let res = await fetch(`/api/addEntry`, {
+      method: 'POST',
+      headers:{
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    let response = await res.json()
+
+    // if (response.success === true) {
+    //   toast.success(response.message, { position: 'top-right', autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: 'light',});
+    //   setOpen(false)
+    //   setFilteredDoctors([...filteredDoctors, response.data]);
+    // }
+    // else {
+    //   toast.error(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+    // }
+
   }
 
   
@@ -61,9 +106,9 @@ const DoctorDetail = ({ dbDoctors }) => {
 
                 <Rating value={4} />
 
-                <p className="my-3 text-sm font-medium tracking-wide text-gray-800 dark:text-gray-400">Fees: 40$</p>
+                <p className="my-5 text-sm font-medium tracking-wide text-gray-800 dark:text-gray-400">Fees: 40$</p>
 
-                <div className='flex-col space-y-3'>
+                <div className='flex-col space-y-5'>
 
                   <h1 className='flex items-center'>
                     <FaUserAlt className='text-baseColor text-lg mr-3'/>
@@ -107,8 +152,96 @@ const DoctorDetail = ({ dbDoctors }) => {
 
 
           </div>
-          <div className='w-1/2 bg-red-50'>
+          <div className='w-1/2 bg-gray-50 px-5 py-10'>
 
+            <form method="POST" onSubmit={submit}>
+                                    
+              <div className="grid grid-cols-6 gap-6">
+
+                <div className="col-span-6">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                    Name
+                  </label>
+                  <input
+                    onChange={handleChange}
+                    value={appointmentData.name}
+                    type="text"
+                    name="name"
+                    id="name"
+                    autoComplete="name"
+                    className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
+                  />
+                </div>
+                
+
+                <div className="col-span-6">
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                    Email
+                  </label>
+                  <input
+                    onChange={handleChange}
+                    value={appointmentData.email}
+                    type="email"
+                    name="email"
+                    id="email"
+                    autoComplete="email"
+                    className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
+                  />
+                </div>
+
+                <div className="col-span-6 sm:col-span-3">
+                  <label htmlFor="appointmentData" className="block text-sm font-medium text-gray-700">
+                    Appointment Date
+                  </label>
+                  <input
+                    onChange={handleChange}
+                    value={appointmentData.appointmentDate}
+                    type="date"
+                    name="appointmentDate"
+                    id="appointmentDate"
+                    autoComplete="appointmentDate"
+                    className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
+                  />
+                </div>
+
+                <div className="col-span-6 sm:col-span-3">
+                  <label htmlFor="appointmentTime" className="block text-sm font-medium text-gray-700">
+                    Appointment Time
+                  </label>
+                  <input
+                    onChange={handleChange}
+                    value={appointmentData.appointmentTime}
+                    type="time"
+                    name="appointmentTime"
+                    id="appointmentTime"
+                    autoComplete="appointmentTime"
+                    className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
+                  />
+                </div>
+
+
+                <div className="col-span-6">
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+                    Message
+                  </label>
+                  <textarea
+                    onChange={handleChange}
+                    value={appointmentData.message}
+                    rows={4}
+                    name="message"
+                    id="message"
+                    autoComplete="message"
+                    className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
+                  />
+                </div>
+
+              </div>
+
+              <div className="mt-5 space-x-3 py-3 text-right">
+                <button type="submit" className="w-full inline-flex justify-center rounded-md border border-transparent bg-baseColor py-2 text-sm font-medium text-white shadow-sm hover:bg-hoverBaseColor focus:outline-none focus:ring-2 focus:ring-baseColor focus:ring-offset-2">Book Appointment</button>
+              </div>
+              
+            </form>
           </div>
 
         </div>}
