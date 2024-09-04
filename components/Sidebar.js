@@ -58,12 +58,12 @@ const Sidebar = () => {
             </ListItem>
           </Link>
 
-          <Link href={"/panel/patients"}>
-            <ListItem className={` ${router.asPath === '/panel/patients' && 'bg-[#f0f2f4]' } `}>
+          <Link href={"/panel/appointments"}>
+            <ListItem className={` ${router.asPath === '/panel/appointments' && 'bg-[#f0f2f4]' } `}>
               <ListItemPrefix>
                 <FaMaskFace className='text-xl '/>
               </ListItemPrefix>
-              Patients
+              Appointments
             </ListItem>
           </Link>
 
@@ -105,6 +105,15 @@ const Sidebar = () => {
               Ayurvedic Centers
             </ListItem>
           </Link>
+
+          {/* <Link href={"/panel/appointments"}>
+            <ListItem className={` ${router.asPath === '/panel/ayurvedicCenters' && 'bg-[#f0f2f4]' } `}>
+              <ListItemPrefix>
+                <GiHospitalCross className='text-xl '/>
+              </ListItemPrefix>
+              Appointments
+            </ListItem>
+          </Link> */}
 
 
           {/* InBox */}

@@ -4,6 +4,7 @@ import AyurvedicCenter from "@/model/AyurvedicCenter";
 import Doctor from "@/model/Doctor";
 import Bed from "@/model/Bed";
 import DrugSupplier from "@/model/DrugSupplier";
+import Appointment from "@/model/Appointment";
 
 export default async function handler(req, res) {
 
@@ -52,6 +53,13 @@ export default async function handler(req, res) {
       let newEntry = new Bed(bedData);
       await newEntry.save();
       res.status(200).json({ success: true, data:bedData,  message: "Entry Added!" })
+    }
+    else if (path === 'Appointment') {
+      const { appointmentData  } = req.body;
+
+      let newEntry = new Appointment(appointmentData);
+      await newEntry.save();
+      res.status(200).json({ success: true,  message: "Appointment Sent!" })
     }
 
 

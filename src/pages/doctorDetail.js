@@ -9,7 +9,8 @@ import { FaPhoneAlt, FaUserAlt } from 'react-icons/fa'
 import { FaRegHospital, FaTransgender } from 'react-icons/fa6'
 import { MdEmail } from 'react-icons/md'
 import { TiTick } from "react-icons/ti";
-import ReactSelect from 'react-select'
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const DoctorDetail = ({ dbDoctors }) => {
 
@@ -61,7 +62,10 @@ const DoctorDetail = ({ dbDoctors }) => {
   const submit = async(e)=>{
     e.preventDefault();
 
-    const data = { appointmentData, path:'Doctors' }
+    appointmentData.doctorName = doctor.name;
+    appointmentData.doctorID = doctor.doctorID;
+
+    const data = { appointmentData, path:'Appointment' }
 
     let res = await fetch(`/api/addEntry`, {
       method: 'POST',
@@ -72,20 +76,33 @@ const DoctorDetail = ({ dbDoctors }) => {
     })
     let response = await res.json()
 
-    // if (response.success === true) {
-    //   toast.success(response.message, { position: 'top-right', autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: 'light',});
-    //   setOpen(false)
-    //   setFilteredDoctors([...filteredDoctors, response.data]);
-    // }
-    // else {
-    //   toast.error(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-    // }
+    if (response.success === true) {
+
+      setAppointmentData({
+        doctorName: '',
+        name: '',
+        doctorID: '',
+        email: '',
+        message: '',
+        appointmentDate: '',
+        appointmentTime: '',
+      })
+      toast.success(response.message, { position: 'top-right', autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: 'light',});
+    }
+    else {
+      toast.error(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+    }
 
   }
 
   
   return (
     <div>
+
+      {/* React tostify */}
+      <ToastContainer position="top-right" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
+
+
       <Navbar />
       <div className='py-14 min-h-screen'>
 
