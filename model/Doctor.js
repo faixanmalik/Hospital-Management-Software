@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const DoctorSchema = new mongoose.Schema({
 
     doctorID: { type: String },
+    profilePic: { type: String },
     name: { type: String },
     specialization: { type: String },
     courses: { type: String },

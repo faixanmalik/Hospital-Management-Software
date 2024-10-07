@@ -103,6 +103,7 @@ const Drugs = ({ dbDrugs }) => {
     let response = await res.json()
     if (response.success === true) {
       setOpen(false)
+      toast.success(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
       setFilteredDrugs((prevDrugs) =>
         prevDrugs.map((drug) =>
           drug._id === drugData._id ? drugData : drug

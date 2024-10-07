@@ -4,6 +4,7 @@ const AyurvedicCenterSchema = new mongoose.Schema({
 
     centerID:{type: String},
     name:{type: String},
+    profilePic: { type: String },
     email:{type: String},
     contactNo: {type: String},
     location: {type: String},

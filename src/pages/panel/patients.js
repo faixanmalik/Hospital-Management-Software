@@ -109,6 +109,7 @@ const Patients = ({ dbPatients }) => {
     let response = await res.json()
     if (response.success === true) {
       setOpen(false)
+      toast.success(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
       setFilteredPatients((prevPatients) =>
         prevPatients.map((drug) =>
           drug._id === patientData._id ? patientData : drug

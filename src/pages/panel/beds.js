@@ -102,6 +102,7 @@ const Beds = ({ dbBeds, dbHospitals }) => {
     let response = await res.json()
     if (response.success === true) {
       setOpen(false)
+      toast.success(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
       setFilteredBeds((prevBeds) =>
         prevBeds.map((bed) =>
           bed._id === bedData._id ? bedData : bed

@@ -36,6 +36,7 @@ const AyurvedicCenters = ({ dbAyurvedicCenters }) => {
   const [centerData, setCenterData] = useState({
     centerID: '',
     name: '',
+    profilePic: '',
     email: '',
     contactNo: '',
     location: '',
@@ -51,6 +52,23 @@ const AyurvedicCenters = ({ dbAyurvedicCenters }) => {
       ...prevData,
       [name]: value,
     }));
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        const imageDataUrl = reader.result;
+        setCenterData((prevData) => ({
+          ...prevData,
+          profilePic: imageDataUrl,
+        }));
+      };
+    }
   };
 
 
@@ -101,6 +119,7 @@ const AyurvedicCenters = ({ dbAyurvedicCenters }) => {
     let response = await res.json()
     if (response.success === true) {
       setOpen(false)
+      toast.success(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
       setFilteredData((prevData) =>
         prevData.map((item) =>
           item._id === centerData._id ? centerData : item
@@ -165,6 +184,7 @@ const AyurvedicCenters = ({ dbAyurvedicCenters }) => {
                         setCenterData({
                           centerID: '',
                           name: '',
+                          profilePic: '',
                           email: '',
                           location: '',
                           contactNo: '',
@@ -292,6 +312,86 @@ const AyurvedicCenters = ({ dbAyurvedicCenters }) => {
                                 <form method="POST" onSubmit={submit}>
                                     
                                   <div className="grid grid-cols-6 gap-6">
+
+
+                                  <div className="col-span-6">
+                                      
+                                      <div class="relative flex items-center w-full">
+                                        {centerData.profilePic ? (
+                                          <div class="relative group w-40 h-40">
+                                            <img
+                                              src={centerData.profilePic}
+                                              alt="avatar"
+                                              className="object-contain w-40 h-40 p-1 rounded-full ring-2 ring-baseColor"
+                                            />
+                                            {/* Label that shows on hover */}
+                                            <label
+                                              htmlFor="dropzone-file"
+                                              className="absolute inset-0 flex flex-col items-center justify-center w-40 h-40 rounded-full border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50 bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                                            >
+                                              <div class="flex flex-col items-center justify-center">
+                                                <svg
+                                                  class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                  aria-hidden="true"
+                                                  xmlns="http://www.w3.org/2000/svg"
+                                                  fill="none"
+                                                  viewBox="0 0 20 16"
+                                                >
+                                                  <path
+                                                    stroke="currentColor"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                                                  />
+                                                </svg>
+                                                <p class="mb-2 text-sm text-center text-gray-500 dark:text-gray-400">
+                                                  <span class="font-semibold">Change Image</span>
+                                                </p>
+                                                <p class="text-xs text-center text-gray-500 dark:text-gray-400">
+                                                  PNG, or JPG (MAX. 800x400px)
+                                                </p>
+                                              </div>
+                                              <input onChange={handleImageChange} id="dropzone-file" type="file" class="hidden" />
+                                            </label>
+                                          </div>
+                                        ) : (
+                                          <label
+                                            htmlFor="dropzone-file"
+                                            class="flex flex-col items-center justify-center w-40 h-40 rounded-full border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                                          >
+                                            <div class="flex flex-col items-center justify-center">
+                                              <svg
+                                                class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 20 16"
+                                              >
+                                                <path
+                                                  stroke="currentColor"
+                                                  stroke-linecap="round"
+                                                  stroke-linejoin="round"
+                                                  stroke-width="2"
+                                                  d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                                                />
+                                              </svg>
+                                              <p class="mb-2 text-sm text-center text-gray-500 dark:text-gray-400">
+                                                <span class="font-semibold">Click to upload Image</span>
+                                              </p>
+                                              <p class="text-xs text-center text-gray-500 dark:text-gray-400">
+                                                PNG, or JPG (MAX. 800x400px)
+                                              </p>
+                                            </div>
+                                            <input onChange={handleImageChange} id="dropzone-file" type="file" class="hidden" />
+                                          </label>
+                                        )}
+                                      </div>
+                                      
+                                    </div>
+
+
+
                                     <div className="col-span-6 sm:col-span-1">
                                       <label htmlFor="centerID" className="block text-sm font-medium text-gray-700">
                                         Center ID
