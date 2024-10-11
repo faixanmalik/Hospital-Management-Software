@@ -21,7 +21,7 @@ const MyAppointments = ({ dbAppointments }) => {
   return (
     <main className="w-full min-h-screen bg-gray-100">
       
-      <Navbar />
+      <Navbar bg={'white'} logoColor={'primary'} hoverSigninBG={'gray-50'}/>
 
       <div className="p-3 w-full">
 

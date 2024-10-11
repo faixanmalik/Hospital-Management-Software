@@ -25,7 +25,7 @@ const Hospitals = ({ dbHospital }) => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar bg={'white'} logoColor={'primary'} hoverSigninBG={'gray-50'}/>
 
 
       <div className='py-14'>
