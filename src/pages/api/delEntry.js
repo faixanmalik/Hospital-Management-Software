@@ -4,6 +4,7 @@ import AyurvedicCenter from "@/model/AyurvedicCenter";
 import Doctor from "@/model/Doctor";
 import Bed from "@/model/Bed";
 import DrugSupplier from "@/model/DrugSupplier";
+import PlantDatabase from "@/model/PlantDatabase";
 
 export default async function handler(req, res) {
 
@@ -44,6 +45,12 @@ export default async function handler(req, res) {
       const { selectedIds } = req.body;
 
       await Bed.deleteMany({ _id: { $in: selectedIds } })
+      res.status(200).json({ success: true, message: "Deleted Successfully !" })
+    }
+    else if (path === 'plantData') {
+      const { selectedIds } = req.body;
+
+      await PlantDatabase.deleteMany({ _id: { $in: selectedIds } })
       res.status(200).json({ success: true, message: "Deleted Successfully !" })
     }
     

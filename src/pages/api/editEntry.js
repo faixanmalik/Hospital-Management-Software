@@ -4,6 +4,7 @@ import AyurvedicCenter from "@/model/AyurvedicCenter";
 import Doctor from "@/model/Doctor";
 import Bed from "@/model/Bed";
 import DrugSupplier from "@/model/DrugSupplier";
+import PlantDatabase from "@/model/PlantDatabase";
 
 export default async function handler(req, res) {
 
@@ -44,6 +45,12 @@ export default async function handler(req, res) {
       const { id, bedData } = req.body;
 
       await Bed.updateOne({ _id: id }, bedData);
+      res.status(200).json({ success: true, message: "Update Successfully!" })
+    }
+    else if (path === 'plantData') {
+      const { id, plantData } = req.body;
+
+      await PlantDatabase.updateOne({ _id: id }, bedData);
       res.status(200).json({ success: true, message: "Update Successfully!" })
     }
     

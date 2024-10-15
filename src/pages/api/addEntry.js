@@ -5,6 +5,7 @@ import Doctor from "@/model/Doctor";
 import Bed from "@/model/Bed";
 import DrugSupplier from "@/model/DrugSupplier";
 import Appointment from "@/model/Appointment";
+import PlantDatabase from "@/model/PlantDatabase";
 
 export default async function handler(req, res) {
 
@@ -58,6 +59,13 @@ export default async function handler(req, res) {
       const { appointmentData  } = req.body;
 
       let newEntry = new Appointment(appointmentData);
+      await newEntry.save();
+      res.status(200).json({ success: true,  message: "Appointment Sent!" })
+    }
+    else if (path === 'PlantDatabase') {
+      const { plantData  } = req.body;
+
+      let newEntry = new PlantDatabase(plantData);
       await newEntry.save();
       res.status(200).json({ success: true,  message: "Appointment Sent!" })
     }

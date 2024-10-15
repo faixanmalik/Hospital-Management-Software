@@ -106,6 +106,15 @@ const Sidebar = () => {
             </ListItem>
           </Link>
 
+          <Link href={"/panel/plantDatabase"}>
+            <ListItem className={` ${router.asPath === '/panel/plantDatabase' && 'bg-[#f0f2f4]' } `}>
+              <ListItemPrefix>
+                <GiHospitalCross className='text-xl '/>
+              </ListItemPrefix>
+              Plant Database
+            </ListItem>
+          </Link>
+
           {/* <Link href={"/panel/appointments"}>
             <ListItem className={` ${router.asPath === '/panel/ayurvedicCenters' && 'bg-[#f0f2f4]' } `}>
               <ListItemPrefix>
