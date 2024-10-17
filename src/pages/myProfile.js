@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react'
 import { AiOutlineMedicineBox } from 'react-icons/ai';
 import { MdDelete } from 'react-icons/md';
 
-const MyAppointments = ({ user, logout, dbAppointments }) => {
+const MyProfile = ({ user, logout, dbAppointments }) => {
 
 
   const [filteredAppointments, setFilteredAppointments] = useState([])
@@ -30,7 +30,7 @@ const MyAppointments = ({ user, logout, dbAppointments }) => {
 
             <div className='flex justify-between items-center py-2'>
               <Typography variant="h5" color="blue-gray" className="flex items-center">
-                <AiOutlineMedicineBox className='mr-2 text-xl' /> My Appointments ({filteredAppointments.length})
+                <AiOutlineMedicineBox className='mr-2 text-xl' /> My Profile
               </Typography>
 
               <div className='flex space-x-1'>
@@ -131,20 +131,4 @@ const MyAppointments = ({ user, logout, dbAppointments }) => {
 }
 
 
-export async function getServerSideProps() {
-  if (!mongoose.connections[0].readyState){
-    mongoose.set("strictQuery", false);
-    await mongoose.connect(process.env.MONGO_URI)
-  }
-  
-  let dbAppointments = await Appointment.find()
-
-  // Pass data to the page via props
-  return {
-    props: {
-      dbAppointments: JSON.parse(JSON.stringify(dbAppointments)),
-    }
-  }
-}
-
-export default MyAppointments
+export default MyProfile

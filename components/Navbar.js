@@ -1,9 +1,18 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { FaUserDoctor } from 'react-icons/fa6'
+import {
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Avatar,
+  Typography,
+} from "@material-tailwind/react";
 
-const Navbar = ( { bg='transparent', hoverSigninBG='white', logoColor='white' }) => {
+
+
+const Navbar = ( { user, logout, bg='transparent', hoverSigninBG='white', logoColor='white' }) => {
 
   const router = useRouter();
 
@@ -24,10 +33,49 @@ const Navbar = ( { bg='transparent', hoverSigninBG='white', logoColor='white' })
           <Link className={`${router.asPath === '/drugs' && 'text-baseColor'} hover:text-baseColor`} href={'/drugs'}>Drugs</Link>
         </div>
         <div className='w-[75%] flex justify-end'>
-          <Link href={'/doctors'} className="w-fit bg-baseColor hover:bg-hoverBaseColor flex items-center px-3 py-2 text-xs font-semibold text-cardColor border-none rounded-md">
-            <FaUserDoctor className='mr-2' />
-            Book an Appointment
-          </Link>
+          
+          {user 
+          ? <>
+            <Menu>
+              <MenuHandler>
+                <Avatar
+                  src="https://docs.material-tailwind.com/img/face-2.jpg"
+                  alt="avatar"
+                  withBorder={true}
+                  className="p-0.5 cursor-pointer"
+                />
+              </MenuHandler>
+              <MenuList className='p-1'>
+                
+
+                <MenuItem onClick={()=> router.push(`/myDrugRequest`)} className="flex items-center gap-2">
+                  <Typography variant="small" className="font-medium">
+                    Drug Requests
+                  </Typography>
+                </MenuItem>
+
+                <MenuItem onClick={()=> router.push(`/myAppointments`)} className="flex items-center gap-2">
+                  <Typography variant="small" className="font-medium">
+                    My Appointments
+                  </Typography>
+                </MenuItem>
+
+                <hr className="my-1 border-blue-gray-50" />
+                <MenuItem onClick={()=>logout()} className="flex items-center gap-2 ">
+                  <Typography variant="small" className="font-medium">
+                    Sign Out
+                  </Typography>
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </>
+          
+          : <Link href={'/login'} className="w-fit tracking-wide px-8 bg-baseColor hover:bg-hoverBaseColor flex items-center py-2 text-sm font-semibold text-cardColor border-none rounded-md">
+            Login
+          </Link>}
+          
+
+
         </div>
       </div>
     </div>

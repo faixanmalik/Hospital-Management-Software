@@ -1,10 +1,10 @@
 import HomePage from "./homePage";
 
-export default function Home() {
+export default function Home({ user, logout }) {
   return (
    <main className='w-full'>
 
-    <HomePage />
+    <HomePage user={user}/>
 
    </main>
   )

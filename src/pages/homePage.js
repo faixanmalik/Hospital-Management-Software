@@ -7,14 +7,14 @@ import Footer from '@/components/Footer'
 import Statistic from '@/components/Statistic'
 import Testimonials from '@/components/Testimonials'
 
-const HomePage = () => {
+const HomePage = ({ user, logout }) => {
   return (
     <div>
 
       
       <div className="bg-gradient-to-r from-[#f4fafe] to-[#cce3f4] text-gray-800">
         {/* Navbar */}
-        <Navbar />
+        <Navbar user={user} logout={logout} />
 
         {/* Hero Section */}
         <section className="flex justify-between items-center px-6 lg:px-12">

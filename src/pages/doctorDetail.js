@@ -12,7 +12,7 @@ import { TiTick } from "react-icons/ti";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-const DoctorDetail = ({ dbDoctors }) => {
+const DoctorDetail = ({ user, logout, dbDoctors }) => {
 
   const router = useRouter();
   const id = router.query.id;
@@ -103,7 +103,7 @@ const DoctorDetail = ({ dbDoctors }) => {
       <ToastContainer position="top-right" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
 
 
-      <Navbar bg={'white'} logoColor={'primary'} hoverSigninBG={'gray-50'}/>
+      <Navbar user={user} logout={logout} bg={'white'} logoColor={'primary'} hoverSigninBG={'gray-50'}/>
       <div className='py-14 min-h-screen'>
 
         {doctor && <h2 className="mb-8 lg:mb-16 text-3xl font-semibold tracking-wide leading-tight text-center text-gray-900 dark:text-white md:text-4xl">Doctor Detail</h2>}

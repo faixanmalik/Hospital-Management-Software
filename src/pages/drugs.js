@@ -5,7 +5,7 @@ import Drug from '@/model/Drug'
 import mongoose from 'mongoose'
 import Link from 'next/link'
 
-const Drugs = ({ dbDrugs }) => {
+const Drugs = ({ user, logout, dbDrugs }) => {
 
 
   let images = [
@@ -27,7 +27,7 @@ const Drugs = ({ dbDrugs }) => {
 
   return (
     <div>
-      <Navbar bg={'white'} logoColor={'primary'} hoverSigninBG={'gray-50'}/>
+      <Navbar user={user} logout={logout} bg={'white'} logoColor={'primary'} hoverSigninBG={'gray-50'}/>
 
 
       <div className='py-14'>
