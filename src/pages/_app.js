@@ -13,6 +13,7 @@ export default function App({ Component, pageProps }) {
   //  react top loading bar
   const [progress, setProgress] = useState(0)
 
+  const [userEmail, setUserEmail] = useState('')
 
   const [user, setUser] = useState({value: null})
   const [key, setKey] = useState(0)
@@ -31,6 +32,7 @@ export default function App({ Component, pageProps }) {
     let myUser = JSON.parse(localStorage.getItem("myUser"));
     if( myUser ){
       setUser({value: myUser.token , email: myUser.email, name: myUser.name });
+      setUserEmail(myUser.email)
       setKey(Math.random());
     }
     
@@ -47,6 +49,6 @@ export default function App({ Component, pageProps }) {
     
   return <>
     <LoadingBar color='#00c0ab' height={3} progress={progress} waitingTime={300} onLoaderFinished={() => setProgress(0)}/>
-    <Component user={user} setUser={setUser} key={key} setKey={setKey} {...pageProps} />
+    <Component userEmail={userEmail} user={user} setUser={setUser} key={key} setKey={setKey} {...pageProps} />
   </>
 }

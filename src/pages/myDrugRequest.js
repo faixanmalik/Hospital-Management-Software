@@ -1,26 +1,28 @@
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import Appointment from '@/model/Appointment';
+import DrugRequest from '@/model/DrugRequest';
 import { Card, CardBody, Typography } from '@material-tailwind/react';
 import moment from 'moment/moment';
 import mongoose from 'mongoose';
 import React, { useEffect, useState } from 'react'
 import { AiOutlineMedicineBox } from 'react-icons/ai';
+import { FaPlus } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 
-const MyAppointments = ({ userEmail, user, logout, dbAppointments }) => {
+const MyDrugRequest = ({ userEmail, user, logout, dbDrugRequest }) => {
 
 
-  const [filteredAppointments, setFilteredAppointments] = useState([])
+  const [filteredReqs, setFilteredReqs] = useState([])
 
   useEffect(() => {
 
-    let filteredAppointments = dbAppointments.filter((item)=>{
+    let filteredReqs = dbDrugRequest.filter((item)=>{
       return item.email === userEmail
     })
-    setFilteredAppointments(filteredAppointments);
+    setFilteredReqs(filteredReqs);
     
-  }, [dbAppointments])
+  }, [dbDrugRequest])
 
 
   return (
@@ -35,10 +37,17 @@ const MyAppointments = ({ userEmail, user, logout, dbAppointments }) => {
 
             <div className='flex justify-between items-center py-2'>
               <Typography variant="h5" color="blue-gray" className="flex items-center">
-                <AiOutlineMedicineBox className='mr-2 text-xl' /> My Appointments ({filteredAppointments.length})
+                <AiOutlineMedicineBox className='mr-2 text-xl' /> My Drug Requests ({filteredReqs.length})
               </Typography>
 
               <div className='flex space-x-1'>
+
+                <button
+                  className="bg-baseColor hover:bg-hoverBaseColor flex items-center px-3 py-2 text-xs font-semibold text-cardColor border-none rounded-md"
+                >
+                  <FaPlus className='mr-1' />
+                  Drug Request
+                </button>
 
                 <button onClick={()=>delEntry()} className="bg-deleteColor hover:bg-hoverDeleteColor flex items-center px-3 py-2 text-xs font-semibold text-cardColor border-none rounded-md">
                   <MdDelete className='mr-1' />
@@ -62,16 +71,16 @@ const MyAppointments = ({ userEmail, user, logout, dbAppointments }) => {
                               </div>
                             </td>
                             <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                Doctor ID
+                                Drug ID
                             </th>
                             <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                Doctor Name
+                                Drug Name
                             </th>
                             <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                Appointment Date
+                                Supplier Name
                             </th>
                             <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
-                                Appointment Time
+                                Drug Type
                             </th>
                             <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
                                 Status
@@ -81,7 +90,7 @@ const MyAppointments = ({ userEmail, user, logout, dbAppointments }) => {
                         </thead>
                         <tbody className="overflow-y-auto">
                           
-                          {filteredAppointments.length != 0 && filteredAppointments.map((item, index)=>{
+                          {filteredReqs.length != 0 && filteredReqs.map((item, index)=>{
 
                             return <tr key={index} 
                             onClick={(e) => {
@@ -115,7 +124,7 @@ const MyAppointments = ({ userEmail, user, logout, dbAppointments }) => {
                         </tbody>
                       </table>
 
-                      {filteredAppointments.length === 0 && <div className='w-full'>
+                      {filteredReqs.length === 0 && <div className='w-full'>
                         <img className='mx-auto w-96' src="/nodatafound.jpg" alt="" />
                       </div>}
 
@@ -142,14 +151,14 @@ export async function getServerSideProps() {
     await mongoose.connect(process.env.MONGO_URI)
   }
   
-  let dbAppointments = await Appointment.find()
+  let dbDrugRequest = await DrugRequest.find()
 
   // Pass data to the page via props
   return {
     props: {
-      dbAppointments: JSON.parse(JSON.stringify(dbAppointments)),
+      dbDrugRequest: JSON.parse(JSON.stringify(dbDrugRequest)),
     }
   }
 }
 
-export default MyAppointments
+export default MyDrugRequest
