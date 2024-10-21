@@ -6,6 +6,7 @@ import Bed from "@/model/Bed";
 import DrugSupplier from "@/model/DrugSupplier";
 import Appointment from "@/model/Appointment";
 import PlantDatabase from "@/model/PlantDatabase";
+import DrugRequest from "@/model/DrugRequest";
 
 export default async function handler(req, res) {
 
@@ -60,14 +61,21 @@ export default async function handler(req, res) {
 
       let newEntry = new Appointment(appointmentData);
       await newEntry.save();
-      res.status(200).json({ success: true,  message: "Appointment Sent!" })
+      res.status(200).json({ success: true, data:appointmentData, message: "Appointment Sent!" })
     }
     else if (path === 'PlantDatabase') {
       const { plantData  } = req.body;
 
       let newEntry = new PlantDatabase(plantData);
       await newEntry.save();
-      res.status(200).json({ success: true,  message: "Appointment Sent!" })
+      res.status(200).json({ success: true, data:plantData, message: "Appointment Sent!" })
+    }
+    else if (path === 'RequestDrug') {
+      const { requestData  } = req.body;
+
+      let newEntry = new DrugRequest(requestData);
+      await newEntry.save();
+      res.status(200).json({ success: true, data:requestData,  message: "Request Sent!" })
     }
 
 

@@ -7,6 +7,7 @@ const DrugRequestSchema = new mongoose.Schema({
     email: { type: String },
     drugID:{type: String},
     drugName: { type: String },
+    userEmail: { type: String },
     qty:{type: Number},
     desc: {type: String},
     status: {type: String, default: 'Sent'},

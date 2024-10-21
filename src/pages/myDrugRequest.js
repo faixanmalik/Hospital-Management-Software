@@ -11,7 +11,8 @@ import { FaPlus } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/solid'
-
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const MyDrugRequest = ({ userEmail, user, logout, dbDrugRequest }) => {
@@ -33,7 +34,7 @@ const MyDrugRequest = ({ userEmail, user, logout, dbDrugRequest }) => {
   useEffect(() => {
 
     let filteredReqs = dbDrugRequest.filter((item)=>{
-      return item.email === userEmail
+      return item.userEmail === userEmail
     })
     setFilteredReqs(filteredReqs);
     
@@ -53,7 +54,12 @@ const MyDrugRequest = ({ userEmail, user, logout, dbDrugRequest }) => {
   const submit = async(e)=>{
     e.preventDefault();
 
-    const data = { requestData, path:'RequestDrug' }
+    let newReqData = {
+      ...requestData,
+      userEmail
+    }
+
+    const data = { requestData:newReqData, path:'RequestDrug' }
 
     let res = await fetch(`/api/addEntry`, {
       method: 'POST',
@@ -78,6 +84,9 @@ const MyDrugRequest = ({ userEmail, user, logout, dbDrugRequest }) => {
 
   return (
     <main className="w-full min-h-screen bg-gray-100">
+
+      {/* React tostify */}
+      <ToastContainer position="top-right" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
       
       <Navbar user={user} logout={logout} bg={'white'} logoColor={'primary'} hoverSigninBG={'gray-50'}/>
 
