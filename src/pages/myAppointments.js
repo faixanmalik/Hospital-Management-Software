@@ -13,6 +13,10 @@ const MyAppointments = ({ userEmail, user, logout, dbAppointments }) => {
 
   const [filteredAppointments, setFilteredAppointments] = useState([])
 
+   // id For delete
+   const [id, setId] = useState('')
+   const [selectedIds, setSelectedIds] = useState([]);
+
   useEffect(() => {
 
     let filteredAppointments = dbAppointments.filter((item)=>{
@@ -21,6 +25,15 @@ const MyAppointments = ({ userEmail, user, logout, dbAppointments }) => {
     setFilteredAppointments(filteredAppointments);
     
   }, [dbAppointments])
+
+
+  function handleRowCheckboxChange(e, id) {
+    if (e.target.checked) {
+      setSelectedIds([...selectedIds, id]);
+    } else {
+      setSelectedIds(selectedIds.filter(rowId => rowId !== id));
+    }
+  }
 
 
   return (
@@ -93,7 +106,7 @@ const MyAppointments = ({ userEmail, user, logout, dbAppointments }) => {
                             className='cursor-pointer border-b border-gray-300 hover:bg-tableHoverColor'>
                             <td className="w-4 p-2.5">
                               <div className="flex items-center">
-                                <input id="checkbox-table-search-1" type="checkbox" onChange={e => handleRowCheckboxChange(e, item._id)} className="w-4 h-4 text-baseColor bg-gray-100 border-gray-300 rounded focus:ring-0 dark:focus:ring-baseColor dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"/>
+                                <input id="checkbox-table-search-1" type="checkbox" className="w-4 h-4 text-baseColor bg-gray-100 border-gray-300 rounded focus:ring-0 dark:focus:ring-baseColor dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"/>
                               </div>
                             </td>
                             <td className="text-start px-3 py-2 whitespace-nowrap text-xs font-medium text-gray-800">{item.doctorID}</td>

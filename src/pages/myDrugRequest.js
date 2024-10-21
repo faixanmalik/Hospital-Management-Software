@@ -29,6 +29,10 @@ const MyDrugRequest = ({ userEmail, user, logout, dbDrugRequest }) => {
     desc: '',
   });
 
+   // id For delete
+   const [id, setId] = useState('')
+   const [selectedIds, setSelectedIds] = useState([]);
+
   
 
   useEffect(() => {
@@ -81,6 +85,13 @@ const MyDrugRequest = ({ userEmail, user, logout, dbDrugRequest }) => {
 
   }
 
+  function handleRowCheckboxChange(e, id) {
+    if (e.target.checked) {
+      setSelectedIds([...selectedIds, id]);
+    } else {
+      setSelectedIds(selectedIds.filter(rowId => rowId !== id));
+    }
+  }
 
   return (
     <main className="w-full min-h-screen bg-gray-100">
@@ -140,7 +151,7 @@ const MyDrugRequest = ({ userEmail, user, logout, dbDrugRequest }) => {
                           <tr className='w-full'>
                             <td scope="col" className="w-4 p-2.5">
                               <div className="flex items-center">
-                                <input id="checkbox-table-search-1" type="checkbox" onChange={e => handleRowCheckboxChange(e, item._id)} className="w-4 h-4 text-baseColor bg-gray-100 border-gray-300 rounded focus:ring-0 dark:focus:ring-baseColor dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"/>
+                                <input id="checkbox-table-search-1" type="checkbox" className="w-4 h-4 text-baseColor bg-gray-100 border-gray-300 rounded focus:ring-0 dark:focus:ring-baseColor dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"/>
                               </div>
                             </td>
                             <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
@@ -165,7 +176,7 @@ const MyDrugRequest = ({ userEmail, user, logout, dbDrugRequest }) => {
                             return <tr key={index} 
                             onClick={(e) => {
                               if (!e.target.tagName.toLowerCase() === 'input' || e.target.type !== 'checkbox') {
-                                e.stopPropagation(); setBedData(item), setOpen(true), setId(item._id), setIsEdit(true)
+                                e.stopPropagation(); setRequestData(item), setOpen(true), setId(item._id), setIsEdit(true)
                               }
                             }}
                             
