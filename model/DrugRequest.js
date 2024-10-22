@@ -10,6 +10,7 @@ const DrugRequestSchema = new mongoose.Schema({
     userEmail: { type: String },
     qty:{type: Number},
     desc: {type: String},
+    note: {type: String},
     status: {type: String, default: 'Sent'},
     
   },{timestamps:true});

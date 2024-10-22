@@ -32,7 +32,7 @@ const Sidebar = () => {
 
   return (
 
-    <Card className="h-full max-h-screen bg-white shadow-xl shadow-blue-gray-900/5">
+    <Card className="h-full min-h-screen bg-white shadow-xl shadow-blue-gray-900/5">
       <div className="">
         <img src="/newlogo.png" alt="" />
       </div>
@@ -83,6 +83,15 @@ const Sidebar = () => {
                 <AiOutlineMedicineBox className='text-xl '/>
               </ListItemPrefix>
               Drugs
+            </ListItem>
+          </Link>
+
+          <Link href={"/panel/drugsRequest"}>
+            <ListItem className={` ${router.asPath === '/panel/drugsRequest' && 'bg-[#f0f2f4]' } `}>
+              <ListItemPrefix>
+                <AiOutlineMedicineBox className='text-xl '/>
+              </ListItemPrefix>
+              Drugs Requests
             </ListItem>
           </Link>
 

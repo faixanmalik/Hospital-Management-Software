@@ -27,6 +27,7 @@ const MyDrugRequest = ({ userEmail, user, logout, dbDrugRequest }) => {
     drugName: '',
     qty: 0,
     desc: '',
+    note: '',
   });
 
    // id For delete
@@ -122,6 +123,7 @@ const MyDrugRequest = ({ userEmail, user, logout, dbDrugRequest }) => {
                       drugName: '',
                       qty: '',
                       desc: '',
+                      note: '',
                     });
                     
                     setIsEdit(false)
@@ -284,11 +286,26 @@ const MyDrugRequest = ({ userEmail, user, logout, dbDrugRequest }) => {
                                       <textarea
                                         onChange={handleChange}
                                         value={requestData.desc}
-                                        rows={4}
+                                        rows={2}
                                         name="desc"
                                         id="desc"
                                         autoComplete="desc"
                                         className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
+                                      />
+                                    </div>
+
+                                    <div className="col-span-6">
+                                      <label htmlFor="note" className="block text-sm font-medium text-gray-700">
+                                        Special Note From Admin
+                                      </label>
+                                      <textarea
+                                        value={requestData.note}
+                                        rows={2}
+                                        name="note"
+                                        id="note"
+                                        autoComplete="note"
+                                        className="mt-1 cursor-not-allowed p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
+                                        disabled
                                       />
                                     </div>
 
