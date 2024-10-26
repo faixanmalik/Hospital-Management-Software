@@ -69,7 +69,6 @@ const Navbar = ( { user, logout, bg='transparent', hoverSigninBG='white', logoCo
               </MenuList>
             </Menu>
           </>
-          
           : <Link href={'/login'} className="w-fit tracking-wide px-8 bg-baseColor hover:bg-hoverBaseColor flex items-center py-2 text-sm font-semibold text-cardColor border-none rounded-md">
             Login
           </Link>}

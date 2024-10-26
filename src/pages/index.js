@@ -4,7 +4,7 @@ export default function Home({ user, logout }) {
   return (
    <main className='w-full'>
 
-    <HomePage user={user}/>
+    <HomePage user={user} logout={logout}/>
 
    </main>
   )

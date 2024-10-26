@@ -1,4 +1,4 @@
-import AdminLogin from "./adminLogin";
+import Login from "../login";
 
 export default function Home({  }) {
 
@@ -6,7 +6,7 @@ export default function Home({  }) {
     <>
 
     <main className="w-full flex min-h-screen bg-gray-100">
-      <AdminLogin />
+      <Login />
     </main>
     
     </>
