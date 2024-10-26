@@ -6,6 +6,7 @@ import Bed from "@/model/Bed";
 import DrugSupplier from "@/model/DrugSupplier";
 import PlantDatabase from "@/model/PlantDatabase";
 import DrugRequest from "@/model/DrugRequest";
+import Appointment from "@/model/Appointment";
 
 export default async function handler(req, res) {
 
@@ -65,6 +66,14 @@ export default async function handler(req, res) {
       }
 
       res.status(200).json({ success: true, status, message: "Update Successfully!" })
+    }
+    else if (path === 'RatingAppointments') {
+      const { id, rating } = req.body;
+
+      // Only update the rating field for the specified appointment ID
+      await Appointment.updateOne({ _id: id }, { $set: { rating: rating } });
+      res.status(200).json({ success: true, message: "Rating updated successfully!" });
+
     }
     
   }

@@ -1,12 +1,16 @@
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import Appointment from '@/model/Appointment';
-import { Card, CardBody, Typography } from '@material-tailwind/react';
+import { Card, CardBody, Rating, Typography } from '@material-tailwind/react';
 import moment from 'moment/moment';
 import mongoose from 'mongoose';
 import React, { useEffect, useState } from 'react'
 import { AiOutlineMedicineBox } from 'react-icons/ai';
 import { MdDelete } from 'react-icons/md';
+
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const MyAppointments = ({ userEmail, user, logout, dbAppointments }) => {
 
@@ -14,7 +18,7 @@ const MyAppointments = ({ userEmail, user, logout, dbAppointments }) => {
   const [filteredAppointments, setFilteredAppointments] = useState([])
 
    // id For delete
-   const [id, setId] = useState('')
+   const [ratings, setRatings] = useState({});
    const [selectedIds, setSelectedIds] = useState([]);
 
   useEffect(() => {
@@ -34,6 +38,34 @@ const MyAppointments = ({ userEmail, user, logout, dbAppointments }) => {
       setSelectedIds(selectedIds.filter(rowId => rowId !== id));
     }
   }
+
+  const updateRating = async(id, rating) => {
+   
+    // Update the rating in the local state
+    setRatings((prevRatings) => ({
+      ...prevRatings,
+      [id]: rating,
+    }));
+
+    // Update the rating in the database
+    const data = { id, rating, path: 'RatingAppointments'};
+
+    let res = await fetch(`/api/editEntry`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    let response = await res.json()
+    if (response.success === true) {
+      toast.success(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+    }
+    else {
+      toast.error(response.message , { position: "top-right", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+    }
+
+  };
 
 
   return (
@@ -89,6 +121,9 @@ const MyAppointments = ({ userEmail, user, logout, dbAppointments }) => {
                             <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
                                 Status
                             </th>
+                            <th scope="col" className="text-start px-3 py-3 text-sm font-semibold text-gray-600 dark:text-neutral-500">
+                                Rating
+                            </th>
                             
                           </tr>
                         </thead>
@@ -97,13 +132,8 @@ const MyAppointments = ({ userEmail, user, logout, dbAppointments }) => {
                           {filteredAppointments.length != 0 && filteredAppointments.map((item, index)=>{
 
                             return <tr key={index} 
-                            onClick={(e) => {
-                              if (!e.target.tagName.toLowerCase() === 'input' || e.target.type !== 'checkbox') {
-                                e.stopPropagation(); setBedData(item), setOpen(true), setId(item._id), setIsEdit(true)
-                              }
-                            }}
-                            
-                            className='cursor-pointer border-b border-gray-300 hover:bg-tableHoverColor'>
+                              className='cursor-pointer border-b border-gray-300 hover:bg-tableHoverColor'
+                            >
                             <td className="w-4 p-2.5">
                               <div className="flex items-center">
                                 <input id="checkbox-table-search-1" type="checkbox" className="w-4 h-4 text-baseColor bg-gray-100 border-gray-300 rounded focus:ring-0 dark:focus:ring-baseColor dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"/>
@@ -120,6 +150,13 @@ const MyAppointments = ({ userEmail, user, logout, dbAppointments }) => {
                               <span className="py-1.5 font-semibold tracking-wider px-6 bg-baseColor hover:bg-hoverBaseColor rounded-lg">
                                 {item.status || 'Sent'}
                               </span>
+                            </td>
+                            <td className="text-start px-3 py-2 whitespace-nowrap text-xs text-white">
+                              <Rating 
+                                value={ item.rating || ratings[item._id] } // Use the local rating if set, otherwise item.rating
+                                onChange={(value) => updateRating(item._id, value)}
+                                unratedColor="amber" ratedColor="amber" 
+                              />
                             </td>
                             
                           </tr>
