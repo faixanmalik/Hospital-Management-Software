@@ -97,7 +97,7 @@ const Login = () => {
               </div>
               <button type="submit" className="w-full text-white bg-baseColor hover:bg-hoverBaseColor font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign in</button>
               <p className="text-sm font-light text-gray-500 ">
-                  Don’t have an account yet? <Link href={'/panel/signup'} className="font-medium text-baseColor hover:underline">Sign up</Link>
+                  Don’t have an account yet? <Link href={'/signup'} className="font-medium text-baseColor hover:underline">Sign up</Link>
               </p>
             </form>
           </div>
