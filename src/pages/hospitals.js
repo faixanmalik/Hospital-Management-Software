@@ -55,7 +55,7 @@ const Hospitals = ({ user, logout, dbHospital }) => {
             let image = getRandomImage(images);
 
             return <div key={index} onClick={ ()=> { setHospital(item), setOpen(true) } } className="col-span-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <img className="rounded-t-lg object-cover object-top h-96 w-full" src={ image } alt="" />
+              <img className="rounded-t-lg object-cover object-top h-96 w-full" src={ item.profilePic || image } alt="" />
               <div className="py-4 px-2">
                 
                 <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{item.name}</h5>
@@ -104,7 +104,7 @@ const Hospitals = ({ user, logout, dbHospital }) => {
 
               <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
                 <div className="aspect-h-3 aspect-w-2 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
-                  <img alt={'hospital'} src={hospital && hospital.profilePic} className="object-cover object-center" />
+                  <img alt={'hospital'} src={hospital && hospital.profilePic || getRandomImage(images)} className="object-cover object-center" />
                 </div>
                 <div className="sm:col-span-8 lg:col-span-7">
 
