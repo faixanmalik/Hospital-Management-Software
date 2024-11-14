@@ -7,6 +7,7 @@ export default function Home({  }) {
     <>
 
     <Head>
+      <title>වෙදමහත්තයා</title>
       <link rel="icon" href="/logo/favicon.png" sizes="any" type="image/x-icon" />
     </Head>
 
