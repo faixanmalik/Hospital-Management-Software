@@ -24,6 +24,8 @@ const DoctorDetail = ({ user, logout, dbDoctors }) => {
     name: '',
     doctorID: '',
     email: '',
+    age: '',
+    gender: '',
     message: '',
     appointmentDate: '',
     appointmentTime: '',
@@ -83,6 +85,8 @@ const DoctorDetail = ({ user, logout, dbDoctors }) => {
         name: '',
         doctorID: '',
         email: '',
+        age: '',
+        gender: '',
         message: '',
         appointmentDate: '',
         appointmentTime: '',
@@ -205,6 +209,39 @@ const DoctorDetail = ({ user, logout, dbDoctors }) => {
                     className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
                   />
                 </div>
+
+
+
+                <div className="col-span-6 sm:col-span-3">
+                  <label htmlFor="age" className="block text-sm font-medium text-gray-700">
+                    Age
+                  </label>
+                  <input
+                    onChange={handleChange}
+                    value={appointmentData.age}
+                    type="number"
+                    name="age"
+                    id="age"
+                    autoComplete="age"
+                    className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
+                  />
+                </div>
+
+                <div className="col-span-6 sm:col-span-3">
+                  <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
+                    Gender
+                  </label>
+                  <input
+                    onChange={handleChange}
+                    value={appointmentData.gender}
+                    type="text"
+                    name="gender"
+                    id="gender"
+                    autoComplete="gender"
+                    className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:border-baseColor focus:ring-baseColor sm:text-sm"
+                  />
+                </div>
+                
 
                 <div className="col-span-6 sm:col-span-3">
                   <label htmlFor="appointmentData" className="block text-sm font-medium text-gray-700">

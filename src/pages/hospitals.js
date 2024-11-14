@@ -64,7 +64,7 @@ const Hospitals = ({ user, logout, dbHospital }) => {
                 <p className="mb-2 text-sm font-normal tracking-wider text-gray-600 dark:text-gray-400">{item.courses}</p>
                 
                 <button href={'#'} className="mt-10 flex justify-center mx-auto w-full  text-sm font-medium text-white py-2 bg-baseColor rounded-lg hover:bg-hoverBaseColor">
-                  Book an appointment
+                  Read More
                 </button>
                 
               </div>

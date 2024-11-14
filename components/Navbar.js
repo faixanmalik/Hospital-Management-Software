@@ -22,7 +22,7 @@ const Navbar = ( { user, logout, bg='transparent', hoverSigninBG='white', logoCo
       <div className='flex items-center justify-between '>
         <div className='w-full'>
           <Link href={'/'}>
-            <img className='w-12 h-10' src="/navbarlogo.png" alt="" />
+            <img className='h-14' src="/logo/websiteLogo.png" alt="" />
           </Link>
         </div>
         <div className={`flex w-full justify-center items-center font-semibold space-x-7`}>

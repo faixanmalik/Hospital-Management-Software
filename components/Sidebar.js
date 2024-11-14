@@ -33,8 +33,8 @@ const Sidebar = () => {
   return (
 
     <Card className="h-full min-h-screen bg-white shadow-xl shadow-blue-gray-900/5">
-      <div className="">
-        <img src="/newlogo.png" alt="" />
+      <div className="w-full">
+        <img className='h-32 mx-auto' src="/logo/panelLogo.png" alt="" />
       </div>
       <List className='h-full'>
 

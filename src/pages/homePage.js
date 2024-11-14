@@ -6,6 +6,7 @@ import React from 'react'
 import Footer from '@/components/Footer'
 import Statistic from '@/components/Statistic'
 import Testimonials from '@/components/Testimonials'
+import Link from 'next/link'
 
 const HomePage = ({ user, logout }) => {
   return (
@@ -21,12 +22,12 @@ const HomePage = ({ user, logout }) => {
           {/* Left Section */}
           <div className="w-full lg:w-[55%] xl:w-[50%] mt-10 lg:mt-0 lg:space-y-3">
             
-            <h1 className='text-black font-bold text-4xl tracking-widest'>Your Health Matters</h1>
+            <h1 className='text-black font-bold text-4xl tracking-widest'>වෙදමහත්තයා</h1>
             <h1 className='text-gray-600 text-sm'>At Your Health Matters, we&apos;re dedicated to providing comprehensive medical care to help you achieve optimal health and wellness.</h1>
 
-            <button className="bg-baseColor hover:bg-hoverBaseColor flex items-center px-3 py-2 text-xs font-semibold text-cardColor border-none rounded-md">
+            <Link href={'/doctors'} className="w-fit bg-baseColor hover:bg-hoverBaseColor flex items-center px-3 py-2 text-xs font-semibold text-cardColor border-none rounded-md">
               Book an Appointment
-            </button>
+            </Link>
 
           </div>
 
