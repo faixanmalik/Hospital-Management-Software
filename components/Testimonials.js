@@ -10,7 +10,7 @@ const Testimonials = () => {
           </svg> 
           <blockquote>
             <p className="text-2xl font-medium text-gray-900 dark:text-white">
-              &quot;I&apos;ve been using Vedamahathaya for a few months now, and it has made managing my healthcare so much easier. The appointment booking system is straightforward, and I really appreciate it.&quot;
+            "Ayurveda is the science of life that teaches us how to live in harmony with nature and the world around us."
             </p>
           </blockquote>
           <figcaption className="flex items-center justify-center mt-6 space-x-3">
