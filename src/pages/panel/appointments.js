@@ -186,7 +186,7 @@ const Appointments = ({ dbAppointments }) => {
                               return <tr key={index} 
                               onClick={(e) => {
                                 if (!e.target.tagName.toLowerCase() === 'input' || e.target.type !== 'checkbox') {
-                                  e.stopPropagation(); setBedData(item), setOpen(true), setId(item._id), setIsEdit(true)
+                                  e.stopPropagation(); setOpen(true), setId(item._id), setIsEdit(true)
                                 }
                               }}
                               

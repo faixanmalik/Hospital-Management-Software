@@ -68,7 +68,7 @@ const PlantDatabase = ({ dbPlantDatabase }) => {
 
       reader.onload = () => {
         const imageDataUrl = reader.result;
-        setCenterData((prevData) => ({
+        setPlantData((prevData) => ({
           ...prevData,
           profilePic: imageDataUrl,
         }));
