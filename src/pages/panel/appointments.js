@@ -184,13 +184,8 @@ const Appointments = ({ dbAppointments }) => {
                             {filteredAppointments.length != 0 && filteredAppointments.map((item, index)=>{
 
                               return <tr key={index} 
-                              onClick={(e) => {
-                                if (!e.target.tagName.toLowerCase() === 'input' || e.target.type !== 'checkbox') {
-                                  e.stopPropagation(); setOpen(true), setId(item._id), setIsEdit(true)
-                                }
-                              }}
-                              
-                              className='cursor-pointer border-b border-gray-300 hover:bg-tableHoverColor'>
+                                className='border-b border-gray-300 hover:bg-tableHoverColor'
+                              >
                               <td className="w-4 p-2.5">
                                 <div className="flex items-center">
                                   <input id="checkbox-table-search-1" type="checkbox" onChange={e => handleRowCheckboxChange(e, item._id)} className="w-4 h-4 text-baseColor bg-gray-100 border-gray-300 rounded focus:ring-0 dark:focus:ring-baseColor dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"/>
