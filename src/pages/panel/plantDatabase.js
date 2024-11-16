@@ -31,12 +31,7 @@ const PlantDatabase = ({ dbPlantDatabase }) => {
   const [filteredPlantData, setFilteredPlantData] = useState([])
 
   useEffect(() => {
-
-    let filteredPlantData = dbPlantDatabase.filter((item)=>{
-      return item.userType === 'User';
-    })
-    setFilteredPlantData(filteredPlantData);
-
+    setFilteredPlantData(dbPlantDatabase);
   }, [dbPlantDatabase])
   
 

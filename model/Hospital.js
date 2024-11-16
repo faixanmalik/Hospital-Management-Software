@@ -5,6 +5,7 @@ const HospitalSchema = new mongoose.Schema({
     hospitalID:{type: String},
     name:{type: String},
     profilePic: { type: String },
+    clinicPic: { type: String },
     email:{type: String},
     location: {type: String},
     contactNo: {type: String},
