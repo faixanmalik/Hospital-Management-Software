@@ -32,7 +32,6 @@ const AyurvedicCenters = ({ dbAyurvedicCenters }) => {
     setFilteredData(dbAyurvedicCenters);
   }, [dbAyurvedicCenters])
   
-
   const [centerData, setCenterData] = useState({
     centerID: '',
     name: '',

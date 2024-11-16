@@ -20,19 +20,20 @@ const Navbar = ( { user, logout, bg='transparent', hoverSigninBG='white', logoCo
     <div className={`bg-${bg} text-gray-800 py-2.5 px-4`}>
       
       <div className='flex items-center justify-between '>
-        <div className='w-full'>
+        <div className=''>
           <Link href={'/'}>
             <img className='h-14' src="/logo/websiteLogo.png" alt="" />
           </Link>
         </div>
-        <div className={`flex w-full justify-center items-center font-semibold space-x-7`}>
+        <div className={`flex justify-center items-center font-semibold space-x-7`}>
           <Link className={`${router.asPath === '/' && 'text-baseColor'} hover:text-baseColor`} href={'/'}>Home</Link>
           <Link className={`${router.asPath === '/hospitals' && 'text-baseColor'} hover:text-baseColor`} href={'/hospitals'}>Hospitals</Link>
           <Link className={`${router.asPath === '/doctors' && 'text-baseColor'} hover:text-baseColor`} href={'/doctors'}>Doctors</Link>
-          <Link className={` ${router.asPath === '/ayurvedicCenters' && 'text-baseColor'} hover:text-baseColor`} href={'/ayurvedicCenters'}>Wellnes Center</Link>
+          <Link className={`${router.asPath === '/ayurvedicCenters' && 'text-baseColor'} hover:text-baseColor`} href={'/ayurvedicCenters'}>Wellnes Center</Link>
           <Link className={`${router.asPath === '/drugs' && 'text-baseColor'} hover:text-baseColor`} href={'/drugs'}>Drugs</Link>
+          <Link className={`${router.asPath === '/plantDatabase' && 'text-baseColor'} hover:text-baseColor`} href={'/plantDatabase'}>Plant Database</Link>
         </div>
-        <div className='w-[75%] flex justify-end'>
+        <div className='flex '>
           
           {user 
           ? <>

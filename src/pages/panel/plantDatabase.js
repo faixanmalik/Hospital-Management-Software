@@ -44,6 +44,7 @@ const PlantDatabase = ({ dbPlantDatabase }) => {
     scientificSynonyms: '',
     prevNameInWebsite: '',
     familyName: '',
+    profilePic: '',
     englishName: '',
     sinhalaName: '', 
     tamilName: '', 
@@ -62,6 +63,23 @@ const PlantDatabase = ({ dbPlantDatabase }) => {
     }));
   };
 
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        const imageDataUrl = reader.result;
+        setCenterData((prevData) => ({
+          ...prevData,
+          profilePic: imageDataUrl,
+        }));
+      };
+    }
+  };
 
   function handleRowCheckboxChange(e, id) {
     if (e.target.checked) {
@@ -179,6 +197,7 @@ const PlantDatabase = ({ dbPlantDatabase }) => {
                           englishName: '',
                           sinhalaName: '', 
                           tamilName: '', 
+                          profilePic: '',
                           sanskritName: '',
                           conservationStatus: '',
                           desc: '',
@@ -307,6 +326,85 @@ const PlantDatabase = ({ dbPlantDatabase }) => {
                                 <form method="POST" onSubmit={submit}>
                                     
                                   <div className="grid grid-cols-6 gap-6">
+                                  
+
+                                  <div className="col-span-6">
+                                      
+                                      <div className="relative flex items-center w-full">
+                                        {plantData.profilePic ? (
+                                          <div className="relative group w-40 h-40">
+                                            <img
+                                              src={plantData.profilePic}
+                                              alt="avatar"
+                                              className="object-contain w-40 h-40 p-1 rounded-full ring-2 ring-baseColor"
+                                            />
+                                            {/* Label that shows on hover */}
+                                            <label
+                                              htmlFor="dropzone-file"
+                                              className="absolute inset-0 flex flex-col items-center justify-center w-40 h-40 rounded-full border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50 bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                                            >
+                                              <div className="flex flex-col items-center justify-center">
+                                                <svg
+                                                  className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                  aria-hidden="true"
+                                                  xmlns="http://www.w3.org/2000/svg"
+                                                  fill="none"
+                                                  viewBox="0 0 20 16"
+                                                >
+                                                  <path
+                                                    stroke="currentColor"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                                                  />
+                                                </svg>
+                                                <p className="mb-2 text-sm text-center text-gray-500 dark:text-gray-400">
+                                                  <span className="font-semibold">Change Image</span>
+                                                </p>
+                                                <p className="text-xs text-center text-gray-500 dark:text-gray-400">
+                                                  PNG, or JPG (MAX. 800x400px)
+                                                </p>
+                                              </div>
+                                              <input onChange={handleImageChange} id="dropzone-file" type="file" className="hidden" />
+                                            </label>
+                                          </div>
+                                        ) : (
+                                          <label
+                                            htmlFor="dropzone-file"
+                                            className="flex flex-col items-center justify-center w-40 h-40 rounded-full border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                                          >
+                                            <div className="flex flex-col items-center justify-center">
+                                              <svg
+                                                className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 20 16"
+                                              >
+                                                <path
+                                                  stroke="currentColor"
+                                                  stroke-linecap="round"
+                                                  stroke-linejoin="round"
+                                                  stroke-width="2"
+                                                  d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                                                />
+                                              </svg>
+                                              <p className="mb-2 text-sm text-center text-gray-500 dark:text-gray-400">
+                                                <span className="font-semibold">Click to upload Image</span>
+                                              </p>
+                                              <p className="text-xs text-center text-gray-500 dark:text-gray-400">
+                                                PNG, or JPG (MAX. 800x400px)
+                                              </p>
+                                            </div>
+                                            <input onChange={handleImageChange} id="dropzone-file" type="file" className="hidden" />
+                                          </label>
+                                        )}
+                                      </div>
+                                      
+                                    </div>
+                                  
+                                  
                                     <div className="col-span-6 sm:col-span-2">
                                       <label htmlFor="scientificSynonyms" className="block text-sm font-medium text-gray-700">
                                         Scientific Synonyms

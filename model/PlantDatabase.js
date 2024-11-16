@@ -7,6 +7,7 @@ const PlantDatabaseSchema = new mongoose.Schema({
     familyName:{type: String},
     englishName:{type: String},
     sinhalaName:{type: String},
+    profilePic: { type: String },
     tamilName:{type: String},
     sanskritName:{type: String},
     conservationStatus:{type: String},
